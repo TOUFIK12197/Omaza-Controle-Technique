@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard Admin — OMAZA</title>
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- ✅ Librairie Excel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<header class="header" id="header">
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="brand-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="brand-text">
+                <span class="brand-name">OMAZA</span>
+                <span class="brand-sub">Admin</span>
+            </div>
+        </a>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="admin.html" class="nav-link active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="admin-clients.html" class="nav-link"><i class="fas fa-users"></i> Clients</a></li>
+            <li>
+                <button id="themeToggle" class="theme-toggle" title="Mode sombre">
+                🌙
+                </button>
+            </li>
+            <li id="navUserItem"></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="page-header">
+    <div class="container">
+        <h1><i class="fas fa-user-shield"></i> Tableau de bord Administrateur</h1>
+        <p>Gestion des rendez-vous et clients OMAZA</p>
+    </div>
+</section>
+
+<section class="form-section">
+    <div class="container">
+
+        <!-- ✅ STATS DASHBOARD -->
+        <div class="stats-grid">
+            <div class="stat-card stat-blue">
+                <i class="fas fa-calendar-day"></i>
+                <div>
+                    <strong id="statToday">0</strong>
+                    <span>RDV aujourd’hui</span>
+                </div>
+            </div>
+            <div class="stat-card stat-orange">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <strong id="statPending">0</strong>
+                    <span>En attente</span>
+                </div>
+            </div>
+            <div class="stat-card stat-green">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <strong id="statConfirmed">0</strong>
+                    <span>Confirmés</span>
+                </div>
+            </div>
+            <div class="stat-card stat-red">
+                <i class="fas fa-times-circle"></i>
+                <div>
+                    <strong id="statCancelled">0</strong>
+                    <span>Annulés</span>
+                </div>
+            </div>
+            <div class="stat-card stat-purple">
+                <i class="fas fa-flag-checkered"></i>
+                <div>
+                    <strong id="statCompleted">0</strong>
+                    <span>Terminés</span>
+                </div>
+            </div>
+            <div class="stat-card stat-dark">
+                <i class="fas fa-chart-bar"></i>
+                <div>
+                    <strong id="statTotal">0</strong>
+                    <span>Total RDV</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ✅ LISTE DES RDV -->
+        <div class="form-card form-card-wide">
+            <h2 class="form-title">📅 Rendez-vous</h2>
+            <p class="form-subtitle">Liste complète de tous les rendez-vous enregistrés</p>
+
+            <!-- ✅ FILTRES + RECHERCHE + EXPORT EXCEL -->
+            <div class="admin-toolbar">
+                <div class="admin-filters">
+                    <button class="filter-btn active" data-filter="all">Tous</button>
+                    <button class="filter-btn" data-filter="pending">🟠 En attente</button>
+                    <button class="filter-btn" data-filter="confirmed">✅ Confirmés</button>
+                    <button class="filter-btn" data-filter="cancelled">❌ Annulés</button>
+                    <button class="filter-btn" data-filter="completed">🏁 Terminés</button>
+
+                    <button id="btnExportExcel" class="filter-btn"
+                        style="background:#27ae60; color:white; border-color:#27ae60;">
+                        <i class="fas fa-file-excel"></i> Exporter Excel
+                    </button>
+                    <button id="btnMigrateStatuses" class="filter-btn"
+                        title="Convertir les anciens statuts français vers les codes techniques">
+                        <i class="fas fa-arrows-rotate"></i> Migrer les statuts
+                    </button>
+                    <button id="btnMigrateSlots" class="filter-btn"
+                        title="Créer les verrous de créneaux pour les anciens rendez-vous">
+                        <i class="fas fa-calendar-plus"></i> Synchroniser les créneaux
+                    </button>
+                </div>
+
+                <div class="admin-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Rechercher nom, téléphone ou immatriculation...">
+                </div>
+            </div>
+
+            <div id="rdvList" style="display:flex; flex-direction:column; gap:14px;">
+                Chargement...
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ✅ Firebase Core -->
+<script type="module" src="../js/firebase-config.js"></script>
+<script type="module" src="../js/auth.js"></script>
+<script type="module" src="../js/session.js"></script>
+<script type="module" src="../js/email-diagnostic.js"></script>
+
+
+<!-- ✅ Liste RDV Admin + Export Excel -->
+<script type="module">
+import { initSession, protectAdminPage } from "../js/session.js";
+import {
+    getAllAppointments,
+    migrateAppointmentSlots,
+    migrateLegacyAppointmentStatuses,
+    updateAppointmentStatus
+} from "../js/appointments.js?v=20260918-4";
+import {
+    APPOINTMENT_STATUS,
+    getAppointmentStatusLabel
+} from "../js/statuses.js";
+
+protectAdminPage();
+initSession();
+
+let allRDVs = [];
+let enattenteCancelId = null;
+
+/* ============================
+   RENDU DE LA LISTE RDV
+============================ */
+function renderRDVList(filter = "all", search = "") {
+    const list = document.getElementById("rdvList");
+    list.innerHTML = "";
+
+    let filtered = allRDVs;
+
+    if (filter !== "all") {
+        filtered = filtered.filter(r => r.status === filter);
+    }
+
+    if (search.trim()) {
+        const s = search.toLowerCase();
+        filtered = filtered.filter(r =>
+            (r.prenom || "").toLowerCase().includes(s) ||
+            (r.nom || "").toLowerCase().includes(s) ||
+            (r.telephone || "").toLowerCase().includes(s) ||
+            (r.immatriculation || "").toLowerCase().includes(s)
+        );
+    }
+
+    if (!filtered.length) {
+        list.innerHTML = "<p style='text-align:center;color:#64748b;padding:20px;'>Aucun rendez-vous correspondant.</p>";
+        return;
+    }
+
+    filtered.forEach(rdv => {
+        const date = rdv.date ? new Date(rdv.date).toLocaleDateString("fr-FR") : "—";
+
+        const card = document.createElement("div");
+        card.className = "rdv-item";
+
+        card.innerHTML = `
+            <div class="rdv-info">
+                <strong>${rdv.prenom || ""} ${rdv.nom || ""}</strong> — ${rdv.telephone || "—"}<br>
+                <small>${rdv.marque || ""} ${rdv.modele || ""} (${rdv.categorie || ""}) — ${rdv.immatriculation || "—"}</small><br>
+                📅 <strong>${date}</strong> à <strong>${rdv.heure || "—"}</strong> — Service : ${rdv.service || "—"}<br>
+                Statut : <span class="rdv-status rdv-status-${rdv.status || APPOINTMENT_STATUS.PENDING}">${getAppointmentStatusLabel(rdv.status, true)}</span>
+            </div>
+            <div class="rdv-actions">
+                <button class="btn btn-primary btn-sm rdv-btn" data-action="confirmed" data-id="${rdv.id}">✅ Confirmer</button>
+                <button class="btn btn-secondary btn-sm rdv-btn" data-action="completed" data-id="${rdv.id}">🏁 Terminer</button>
+                <button class="btn btn-danger btn-sm rdv-btn" data-action="cancelled" data-id="${rdv.id}">❌ Annuler</button>
+            </div>
+        `;
+
+        list.appendChild(card);
+    });
+
+    attachRdvButtonListeners();
+}
+
+function attachRdvButtonListeners() {
+    document.querySelectorAll(".rdv-btn").forEach(btn => {
+        btn.addEventListener("click", handleRdvAction);
+    });
+}
+
+/* ============================
+   ACTION ADMIN (Confirmer / Terminer / Annuler)
+============================ */
+async function handleRdvAction(event) {
+    const btn = event.currentTarget;
+    const id = btn.getAttribute("data-id");
+    const action = btn.getAttribute("data-action");
+
+    // ANNULATION → ouvre le modal
+    if (action === APPOINTMENT_STATUS.CANCELLED) {
+        openCancelModal(id);
+        return;
+    }
+
+    const actionLabels = {
+        [APPOINTMENT_STATUS.CONFIRMED]: "confirmer",
+        [APPOINTMENT_STATUS.COMPLETED]: "terminer"
+    };
+    const label = actionLabels[action] || action;
+
+    if (!confirm(`Voulez-vous vraiment ${label} ce rendez-vous ?\n\nUn email sera automatiquement envoyé au client.`)) {
+        return;
+    }
+
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = "⏳ Envoi...";
+    btn.style.opacity = "0.6";
+
+    try {
+
+        const rdv = allRDVs.find(r => r.id === id);
+        const result = await updateAppointmentStatus(id, action);
+
+        if (!result.success) throw new Error(result.message);
+
+
+
+        showToast(`✅ RDV ${label} avec succès — 📧 Email envoyé`, "success");
+        window.location.reload();
+
+    } catch (error) {
+        btn.disabled = false;
+        btn.textContent = originalText;
+        btn.style.opacity = "1";
+        showToast("❌ " + (error.message || "Impossible de mettre à jour le rendez-vous"), "error");
+    }
+}
+
+/* ============================
+   MODAL ANNULATION
+============================ */
+function openCancelModal(rdvId) {
+    enattenteCancelId = rdvId;
+    const modal = document.getElementById("cancelModal");
+    const select = document.getElementById("cancelReasonSelect");
+    const textarea = document.getElementById("cancelReasonText");
+
+    if (!modal) {
+        const reason = prompt("Raison de l'annulation ?");
+        if (reason) {
+            handleCancellation(rdvId, reason);
+        }
+        return;
+    }
+
+    select.value = "";
+    textarea.value = "";
+    textarea.style.display = "none";
+    modal.style.display = "flex";
+}
+
+async function handleCancellation(rdvId, reason) {
+    try {
+
+        const rdv = allRDVs.find(r => r.id === rdvId);
+        const result = await updateAppointmentStatus(rdvId, APPOINTMENT_STATUS.CANCELLED, reason);
+
+        if (!result.success) throw new Error(result.message);
+
+
+
+        showToast(`✅ RDV annulé — 📧 Email envoyé (Raison : ${reason})`, "success");
+        window.location.reload();
+
+    } catch (error) {
+        showToast("❌ " + (error.message || "Impossible d'annuler le rendez-vous"), "error");
+    }
+}
+
+/* ============================
+   INIT DASHBOARD
+============================ */
+document.addEventListener("DOMContentLoaded", () => {
+
+    // Modal events
+    const select = document.getElementById("cancelReasonSelect");
+    if (select) {
+        select.addEventListener("change", function () {
+            document.getElementById("cancelReasonText").style.display =
+                this.value === "Autre" ? "block" : "none";
+        });
+    }
+
+    const closeBtn = document.getElementById("cancelModalClose");
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+            document.getElementById("cancelModal").style.display = "none";
+            enattenteCancelId = null;
+        });
+    }
+
+    const confirmBtn = document.getElementById("cancelModalConfirm");
+    if (confirmBtn) {
+        confirmBtn.addEventListener("click", async () => {
+            const select = document.getElementById("cancelReasonSelect");
+            const textarea = document.getElementById("cancelReasonText");
+
+            let reason = select.value;
+            if (!reason) {
+                showToast("⚠️ Veuillez sélectionner une raison", "warning");
+                return;
+            }
+            if (reason === "Autre") {
+                reason = textarea.value.trim() || "Autre (non précisé)";
+            }
+
+            document.getElementById("cancelModal").style.display = "none";
+            confirmBtn.disabled = true;
+            confirmBtn.textContent = "⏳ Envoi...";
+
+            await handleCancellation(enattenteCancelId, reason);
+
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = "Confirmer l'annulation";
+            enattenteCancelId = null;
+        });
+    }
+
+    // Fermer modal au clic en dehors
+    const modal = document.getElementById("cancelModal");
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+                enattenteCancelId = null;
+            }
+        });
+    }
+
+    loadAndRenderAppointments();
+
+    // Filters
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+        if (!btn.hasAttribute("data-filter")) return;
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const filter = btn.getAttribute("data-filter");
+            const search = document.getElementById("searchInput").value;
+            renderRDVList(filter, search);
+        });
+    });
+
+    // Search
+    const searchInput = document.getElementById("searchInput");
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            const filter = document.querySelector(".filter-btn.active")?.getAttribute("data-filter") || "all";
+            renderRDVList(filter, e.target.value);
+        });
+    }
+
+    // Export Excel
+    document.getElementById("btnExportExcel").addEventListener("click", () => {
+        if (!allRDVs.length) {
+            showToast("⚠️ Aucun RDV à exporter", "warning");
+            return;
+        }
+
+        const data = allRDVs.map(r => ({
+            Date: r.date ? new Date(r.date).toLocaleDateString("fr-FR") : "—",
+            Heure: r.heure || "—",
+            Client: `${r.prenom || ""} ${r.nom || ""}`,
+            Téléphone: r.telephone || "",
+            Véhicule: `${r.marque || ""} ${r.modele || ""}`,
+            Catégorie: r.categorie || "",
+            Immatriculation: r.immatriculation || "",
+            Service: r.service || "",
+            Statut: getAppointmentStatusLabel(r.status)
+        }));
+
+        const ws = XLSX.utils.json_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Rendez-vous OMAZA");
+
+        const today = new Date().toISOString().split("T")[0];
+        XLSX.writeFile(wb, `OMAZA-rendez-vous-${today}.xlsx`);
+    });
+
+    // Migration ponctuelle des anciennes valeurs : Enattente, En attente, Confirmer…
+    document.getElementById("btnMigrateStatuses").addEventListener("click", async () => {
+        if (!confirm("Convertir définitivement les anciens statuts vers les codes techniques ?")) {
+            return;
+        }
+
+        const btn = document.getElementById("btnMigrateStatuses");
+        btn.disabled = true;
+        btn.textContent = "Migration…";
+
+        const result = await migrateLegacyAppointmentStatuses();
+        if (result.success) {
+            showToast(`${result.migrated} rendez-vous migré(s).`, "success");
+            window.location.reload();
+        } else {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-arrows-rotate"></i> Migrer les statuts';
+            showToast("❌ " + (result.message || "Migration impossible"), "error");
+        }
+    });
+
+    document.getElementById("btnMigrateSlots").addEventListener("click", async () => {
+        if (!confirm("Créer les verrous de créneaux pour les anciens rendez-vous actifs ?")) {
+            return;
+        }
+
+        const btn = document.getElementById("btnMigrateSlots");
+        btn.disabled = true;
+        btn.textContent = "Synchronisation…";
+
+        const result = await migrateAppointmentSlots();
+        if (result.success) {
+            showToast(`${result.migrated} créneau(x) synchronisé(s).`, "success");
+            window.location.reload();
+        } else {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-calendar-plus"></i> Synchroniser les créneaux';
+            showToast("❌ " + (result.message || "Synchronisation impossible"), "error");
+        }
+    });
+});
+
+async function loadAndRenderAppointments() {
+    try {
+        allRDVs = await getAllAppointments();
+        renderRDVList();
+    } catch (error) {
+        console.error("Erreur :", error);
+        document.getElementById("rdvList").innerHTML =
+            "<p style='color:#dc2626;text-align:center;padding:20px;'>❌ Erreur lors du chargement des rendez-vous</p>";
+    }
+}
+</script>
+
+
+<!-- ✅ STATISTIQUES DASHBOARD -->
+<script type="module">
+import { getStats } from "../js/appointments.js?v=20260918-4";
+
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        const stats = await getStats();
+        document.getElementById("statTotal").textContent     = stats.total || 0;
+        document.getElementById("statToday").textContent     = stats.today || 0;
+        document.getElementById("statPending").textContent   = stats.pending || 0;
+        document.getElementById("statConfirmed").textContent = stats.confirmed || 0;
+        document.getElementById("statCancelled").textContent = stats.cancelled || 0;
+        document.getElementById("statCompleted").textContent = stats.completed || 0;
+    } catch (error) {
+        console.error("Erreur stats :", error);
+    }
+});
+</script>
+
+        <!-- ============= MODAL ANNULATION ============= -->
+        <div id="cancelModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(4px);">
+          <div style="background:#fff;border-radius:16px;padding:36px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+            
+            <div style="text-align:center;margin-bottom:24px;">
+              <div style="width:64px;height:64px;background:#fef2f2;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:30px;">❌</div>
+              <h3 style="margin:0;color:#1e293b;font-size:20px;">Annuler le rendez-vous</h3>
+              <p style="color:#64748b;font-size:13px;margin:6px 0 0;">Le client recevra un email d'annulation</p>
+            </div>
+
+            <label style="display:block;color:#475569;font-weight:600;margin-bottom:8px;font-size:14px;">
+              Raison de l'annulation :
+            </label>
+            <select id="cancelReasonSelect" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:14px;margin-bottom:12px;outline:none;background:#fff;box-sizing:border-box;">
+              <option value="">— Choisir une raison —</option>
+              <option value="Créneau indisponible">Créneau indisponible</option>
+              <option value="Documents manquants">Documents manquants</option>
+              <option value="Demande du client">Demande du client</option>
+              <option value="Véhicule non conforme">Véhicule non conforme</option>
+              <option value="Centre fermé exceptionnellement">Centre fermé exceptionnellement</option>
+              <option value="Autre">Autre (préciser)</option>
+            </select>
+
+            <textarea id="cancelReasonText" placeholder="Précisez la raison..." 
+                      style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:14px;height:80px;resize:vertical;display:none;outline:none;box-sizing:border-box;font-family:inherit;"></textarea>
+
+            <div style="display:flex;gap:12px;margin-top:20px;">
+              <button id="cancelModalClose" type="button"
+                      style="flex:1;padding:12px;border:2px solid #e2e8f0;background:#fff;border-radius:8px;font-size:14px;font-weight:600;color:#64748b;cursor:pointer;transition:all 0.2s;">
+                Retour
+              </button>
+              <button id="cancelModalConfirm" type="button"
+                      style="flex:1;padding:12px;border:none;background:linear-gradient(135deg,#dc2626,#ef4444);border-radius:8px;font-size:14px;font-weight:600;color:#fff;cursor:pointer;transition:all 0.2s;">
+                Confirmer l'annulation
+              </button>
+            </div>
+          </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+  emailjs.init("1VBkeUVpA49ZE-v4s"); // ← Ta clé publique EmailJS
+</script>
+
+<script type="module">
+import { showToast } from "../js/toast.js";
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const btn = document.getElementById("themeToggle");
+    const body = document.body;
+
+    // Charger préférence
+    if (localStorage.getItem("omaza-theme") === "dark") {
+        body.classList.add("dark-mode");
+        btn.textContent = "☀️";
+    }
+
+    btn.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+
+        const isDark = body.classList.contains("dark-mode");
+        btn.textContent = isDark ? "☀️" : "🌙";
+
+        localStorage.setItem("omaza-theme", isDark ? "dark" : "light");
+    });
+
+});
+</script>
+
+</body>
+</html>

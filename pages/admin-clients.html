@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Clients — Dashboard OMAZA</title>
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header" id="header">
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="brand-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="brand-text">
+                <span class="brand-name">OMAZA</span>
+                <span class="brand-sub">Admin</span>
+            </div>
+        </a>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="admin.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="admin-clients.html" class="nav-link active"><i class="fas fa-users"></i> Clients</a></li>
+            <li id="navUserItem"></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="page-header">
+    <div class="container">
+        <h1><i class="fas fa-users"></i> Gestion des Clients</h1>
+        <p>Liste de tous les utilisateurs inscrits au Centre OMAZA</p>
+    </div>
+</section>
+
+<section class="form-section">
+    <div class="container">
+        <div class="form-card form-card-wide">
+
+            <div class="admin-toolbar">
+                <div class="admin-search" style="flex:1;">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchClient" placeholder="Rechercher nom, prénom ou téléphone...">
+                </div>
+            </div>
+
+            <div id="clientsList" style="display:flex; flex-direction:column; gap:14px;">
+                Chargement...
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="module" src="../js/firebase-config.js"></script>
+<script type="module" src="../js/auth.js"></script>
+<script type="module" src="../js/session.js"></script>
+
+<script type="module">
+import { initSession, protectAdminPage } from "../js/session.js";
+import { getAllUsers, getAppointmentsByUser } from "../js/appointments.js";
+
+protectAdminPage();
+initSession();
+
+let allUsers = [];
+
+async function renderClients(search = "") {
+    const list = document.getElementById("clientsList");
+    list.innerHTML = "Chargement...";
+
+    if (!allUsers.length) {
+        allUsers = await getAllUsers();
+    }
+
+    let filtered = allUsers;
+    if (search.trim()) {
+        const s = search.toLowerCase();
+        filtered = filtered.filter(u =>
+            (u.prenom || "").toLowerCase().includes(s) ||
+            (u.nom || "").toLowerCase().includes(s) ||
+            (u.telephone || "").includes(s) ||
+            (u.email || "").toLowerCase().includes(s)
+        );
+    }
+
+    if (!filtered.length) {
+        list.innerHTML = "<p>Aucun client trouvé.</p>";
+        return;
+    }
+
+    list.innerHTML = "";
+
+    for (const u of filtered) {
+        const rdvs = await getAppointmentsByUser(u.id);
+        const lastDate = rdvs.length
+            ? new Date(rdvs[0].date).toLocaleDateString("fr-FR")
+            : "—";
+
+        const card = document.createElement("div");
+        card.style.cssText = `
+            border:1px solid #e9ecef;
+            border-radius:12px;
+            padding:16px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:white;
+            box-shadow:0 2px 8px rgba(0,0,0,0.05);
+        `;
+
+        card.innerHTML = `
+            <div>
+                <strong>${u.prenom || ""} ${u.nom || ""}</strong>
+                <span style="color:${u.role==='admin'?'red':'gray'}; font-size:0.75rem; margin-left:8px;">
+                    [${u.role || 'client'}]
+                </span><br>
+                📞 ${u.telephone || "—"}<br>
+                ✉️ ${u.email || "—"}<br>
+                🚗 <strong>${rdvs.length}</strong> rendez-vous · Dernier : <strong>${lastDate}</strong>
+            </div>
+        `;
+
+        list.appendChild(card);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    setTimeout(() => renderClients(), 800);
+
+    document.getElementById("searchClient").addEventListener("input", e => {
+        renderClients(e.target.value);
+    });
+});
+</script>
+
+</body>
+</html>

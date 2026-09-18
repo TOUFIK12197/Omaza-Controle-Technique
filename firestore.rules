@@ -1,0 +1,91 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ═══════════════════════════════
+    // UTILISATEURS
+    // ═══════════════════════════════
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if request.auth != null
+                    && request.auth.uid == userId
+                    && request.resource.data.role == "client";
+      allow update: if (
+        (isOwner(userId) && !changingRole())
+        || isAdmin()
+      );
+      allow delete: if isAdmin();
+    }
+
+    // ═══════════════════════════════
+    // RENDEZ-VOUS
+    // ═══════════════════════════════
+    match /appointments/{rdvId} {
+      allow read: if isAdmin()
+                  || (request.auth != null
+                      && resource.data.userId == request.auth.uid);
+      allow create: if request.auth != null
+                    && request.resource.data.userId == request.auth.uid
+                    && request.resource.data.status == "pending"
+                    && getAfter(/databases/$(database)/documents/appointmentSlots/$(request.resource.data.slotId)).data.appointmentId == rdvId;
+      allow update: if (isAdmin() && isValidAppointmentStatus(request.resource.data.status))
+                    || (
+                      request.auth != null
+                      && request.auth.uid == resource.data.userId
+                      && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["status"])
+                      && request.resource.data.status == "cancelled"
+                    );
+      allow delete: if isAdmin();
+    }
+
+    // Verrous de créneaux : aucune donnée personnelle n'y est stockée.
+    match /appointmentSlots/{slotId} {
+      allow read: if request.auth != null;
+      allow create: if isAdmin()
+                    || (request.auth != null
+                        && request.resource.data.userId == request.auth.uid
+                        && getAfter(/databases/$(database)/documents/appointments/$(request.resource.data.appointmentId)).data.userId == request.auth.uid
+                        && getAfter(/databases/$(database)/documents/appointments/$(request.resource.data.appointmentId)).data.slotId == slotId
+                        && getAfter(/databases/$(database)/documents/appointments/$(request.resource.data.appointmentId)).data.status == "pending");
+      allow delete: if isAdmin()
+                    || (request.auth != null
+                        && resource.data.userId == request.auth.uid
+                        && getAfter(/databases/$(database)/documents/appointments/$(resource.data.appointmentId)).data.status == "cancelled");
+      allow update: if false;
+    }
+
+    // ═══════════════════════════════
+    // ✅ AUDIT LOGS (Nouveau)
+    // ═══════════════════════════════
+    match /auditLogs/{logId} {
+      allow create: if request.auth != null;
+      allow read: if isAdmin();
+      allow update, delete: if false;
+    }
+
+    // ═══════════════════════════════
+    // FONCTIONS
+    // ═══════════════════════════════
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return request.auth != null
+             && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    function changingRole() {
+      return request.resource.data.role != resource.data.role;
+    }
+
+    function isValidAppointmentStatus(status) {
+      return status == "pending"
+             || status == "confirmed"
+             || status == "cancelled"
+             || status == "completed";
+    }
+
+  }
+}

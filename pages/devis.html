@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devis - OMAZA Contrôle Technique | Akbou</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header" id="header">
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="brand-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="brand-text">
+                <span class="brand-name">OMAZA</span>
+                <span class="brand-sub">Contrôle Technique Auto</span>
+            </div>
+        </a>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="../index.html"    class="nav-link"><i class="fas fa-home"></i> Accueil</a></li>
+            <li><a href="services.html"    class="nav-link"><i class="fas fa-tools"></i> Services</a></li>
+            <li><a href="devis.html"       class="nav-link active"><i class="fas fa-file-invoice"></i> Devis</a></li>
+            <li><a href="rendez-vous.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Rendez-vous</a></li>
+            <li id="navUserItem"> <a href="inscription.html" class="nav-link btn-nav"><i class="fas fa-user"></i> Mon Espace</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </nav>
+</header>
+
+<section class="page-header">
+    <div class="container">
+        <h1><i class="fas fa-file-invoice-dollar"></i> Demande de Devis</h1>
+        <p>Tarifs officiels ENACTA · Estimation instantanée · Akbou, Béjaia</p>
+    </div>
+</section>
+
+<section class="form-section">
+    <div class="container">
+        <div class="form-card form-card-wide">
+
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="progress-step active" id="ps1">
+                    <div class="step-bubble">1</div>
+                    <div class="step-label">Catégorie</div>
+                </div>
+                <div class="progress-line" id="pl1"></div>
+                <div class="progress-step" id="ps2">
+                    <div class="step-bubble">2</div>
+                    <div class="step-label">Véhicule</div>
+                </div>
+                <div class="progress-line" id="pl2"></div>
+                <div class="progress-step" id="ps3">
+                    <div class="step-bubble"><i class="fas fa-receipt"></i></div>
+                    <div class="step-label">Devis</div>
+                </div>
+            </div>
+
+            <h2 class="form-title">
+                <i class="fas fa-calculator"></i> Calculer mon devis
+            </h2>
+            <p class="form-subtitle">
+                Sélectionnez la catégorie ENACTA de votre véhicule pour obtenir votre estimation
+            </p>
+
+            <form id="formDevis" novalidate>
+
+                <!-- ÉTAPE 1 : Catégorie ENACTA -->
+                <div class="form-group">
+                    <label>Catégorie officielle ENACTA <span class="required">*</span></label>
+                    <div class="type-selector" id="typeSelector">
+
+                        <div class="type-option" data-type="vl" onclick="selectType('vl', this)">
+                            <div class="check"><i class="fas fa-check"></i></div>
+                            <i class="fas fa-car"></i>
+                            <span>Véhicule Léger</span>
+                            <small>VL — M1 · À partir de 2 100 DA</small>
+                        </div>
+
+                        <div class="type-option" data-type="vul" onclick="selectType('vul', this)">
+                            <div class="check"><i class="fas fa-check"></i></div>
+                            <i class="fas fa-shuttle-van"></i>
+                            <span>Utilitaire Léger</span>
+                            <small>VUL — N1 · À partir de 3 200 DA</small>
+                        </div>
+
+                        <div class="type-option" data-type="pl" onclick="selectType('pl', this)">
+                            <div class="check"><i class="fas fa-check"></i></div>
+                            <i class="fas fa-truck"></i>
+                            <span>Poids Lourd</span>
+                            <small>PL — N2/N3 · À partir de 4 500 DA</small>
+                        </div>
+
+                        <div class="type-option" data-type="tc" onclick="selectType('tc', this)">
+                            <div class="check"><i class="fas fa-check"></i></div>
+                            <i class="fas fa-bus"></i>
+                            <span>Transport Commun</span>
+                            <small>TC — M2/M3 · À partir de 4 500 DA</small>
+                        </div>
+
+                        <div class="type-option" data-type="moto" onclick="selectType('moto', this)">
+                            <div class="check"><i class="fas fa-check"></i></div>
+                            <i class="fas fa-motorcycle"></i>
+                            <span>Deux-Roues</span>
+                            <small>Cat. L · À partir de 1 500 DA</small>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Info catégorie dynamique -->
+                <div class="cat-info-box" id="catInfoBox" style="display:none;">
+                    <div class="cat-info-inner">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong id="catInfoTitle"></strong>
+                            <span id="catInfoText"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ÉTAPE 2 : Informations véhicule -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Marque du véhicule <span class="required">*</span></label>
+                        <select id="marque" required>
+                            <option value="">-- Sélectionner la marque --</option>
+                            <optgroup label="Véhicules populaires en Algérie">
+                                <option>Renault</option>
+                                <option>Peugeot</option>
+                                <option>Citroën</option>
+                                <option>Volkswagen</option>
+                                <option>Toyota</option>
+                                <option>Hyundai</option>
+                                <option>Kia</option>
+                                <option>Dacia</option>
+                                <option>Ford</option>
+                                <option>Opel</option>
+                                <option>Fiat</option>
+                                <option>Nissan</option>
+                                <option>Mercedes-Benz</option>
+                                <option>BMW</option>
+                                <option>Audi</option>
+                                <option>Seat</option>
+                                <option>Skoda</option>
+                                <option>Suzuki</option>
+                                <option>Mitsubishi</option>
+                                <option>Chevrolet</option>
+                            </optgroup>
+                            <optgroup label="Camions / Utilitaires">
+                                <option>Mercedes Sprinter</option>
+                                <option>Iveco</option>
+                                <option>MAN</option>
+                                <option>Scania</option>
+                                <option>Volvo Trucks</option>
+                                <option>DAF</option>
+                                <option>Renault Trucks</option>
+                            </optgroup>
+                            <optgroup label="Deux-Roues">
+                                <option>Yamaha</option>
+                                <option>Honda</option>
+                                <option>Kawasaki</option>
+                                <option>Suzuki Moto</option>
+                                <option>Lifan</option>
+                                <option>Jialing</option>
+                            </optgroup>
+                            <option value="autre">Autre marque</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Modèle <span class="required">*</span></label>
+                        <input type="text" id="modele"
+                            placeholder="Ex: Symbol, Clio, Berlingo, Sprinter..."
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Année de mise en circulation <span class="required">*</span></label>
+                        <select id="annee" required>
+                            <option value="">-- Année --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Type de carburant <span class="required">*</span></label>
+                        <select id="carburant" required>
+                            <option value="">-- Sélectionner --</option>
+                            <option value="essence">⛽ Essence</option>
+                            <option value="diesel">🛢️ Diesel (Gasoil)</option>
+                            <option value="gpl">🔵 GPL</option>
+                            <option value="electrique">⚡ Électrique</option>
+                            <option value="hybride">🔋 Hybride</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Numéro d'immatriculation</label>
+                        <input type="text" id="immat"
+                            placeholder="Ex: 12345-100-16"
+                            maxlength="15">
+                    </div>
+                    <div class="form-group">
+                        <label>Kilométrage actuel</label>
+                        <div class="input-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <input type="number" id="km"
+                                placeholder="Ex: 75000" min="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="form-group">
+                    <label>Services souhaités <span class="required">*</span></label>
+                    <div class="services-checkboxes" id="servicesCheckboxes">
+
+                        <label class="svc-checkbox-label">
+                            <input type="checkbox" name="service" value="ct" checked>
+                            <div class="svc-checkbox-content">
+                                <strong>Contrôle technique obligatoire</strong>
+                                <small>Vérification complète réglementaire ENACTA</small>
+                            </div>
+                        </label>
+
+                        <label class="svc-checkbox-label">
+                            <input type="checkbox" name="service" value="contre">
+                            <div class="svc-checkbox-content">
+                                <strong>Contre-visite</strong>
+                                <small>Suite à un CT refusé — 50% du tarif CT</small>
+                            </div>
+                        </label>
+
+                        <label class="svc-checkbox-label">
+                            <input type="checkbox" name="service" value="precheck">
+                            <div class="svc-checkbox-content">
+                                <strong>Pré-contrôle technique</strong>
+                                <small>Vérification préventive avant CT officiel</small>
+                            </div>
+                        </label>
+
+                        <label class="svc-checkbox-label">
+                            <input type="checkbox" name="service" value="pollution">
+                            <div class="svc-checkbox-content">
+                                <strong>Test anti-pollution seul</strong>
+                                <small>Analyse gaz d'échappement uniquement</small>
+                            </div>
+                        </label>
+
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span>
+                        Estimation basée sur les tarifs officiels <strong>ENACTA</strong>.
+                        Le montant définitif sera confirmé lors de votre visite au Centre OMAZA.
+                    </span>
+                </div>
+
+                <button type="button" onclick="calculerDevis()"
+                    class="btn btn-primary btn-full btn-lg">
+                    <i class="fas fa-calculator"></i> Calculer mon devis
+                </button>
+
+            </form>
+
+            <!-- RÉSULTAT DEVIS -->
+            <div class="devis-result" id="devisResult">
+                <div class="devis-header">
+                    <div>
+                        <h3 class="devis-result-title">
+                            <i class="fas fa-file-invoice"></i> Devis OMAZA
+                        </h3>
+                        <div class="devis-number"  id="devisRef"></div>
+                        <div class="devis-vehicle-info" id="devisVehicleInfo"></div>
+                        <div class="devis-period"  id="devisPeriod"></div>
+                    </div>
+                    <div class="devis-total">
+                        <div class="amount" id="devisTotal">0 DA</div>
+                        <div class="validity">Estimation valable 30 jours</div>
+                    </div>
+                </div>
+
+                <div class="devis-items" id="devisItems"></div>
+
+                <div class="devis-notice">
+                    <i class="fas fa-info-circle"></i>
+                    <span>
+                        Tarifs officiels ENACTA appliqués au Centre OMAZA d'Akbou.
+                        Le montant final peut varier selon l'état du véhicule constaté lors du contrôle.
+                    </span>
+                </div>
+
+                <div class="devis-actions">
+                    <a href="rendez-vous.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-alt"></i> Prendre rendez-vous
+                    </a>
+                    <button onclick="imprimerDevis()" class="btn btn-devis-outline">
+                        <i class="fas fa-print"></i> Imprimer
+                    </button>
+                    <button onclick="nouveauDevis()" class="btn btn-devis-outline">
+                        <i class="fas fa-redo"></i> Nouveau devis
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Section infos -->
+<section class="section bg-white devis-infos-section">
+    <div class="container">
+        <div class="devis-infos-grid">
+            <div class="devis-info-card">
+                <div class="devis-info-icon icon-red">
+                    <i class="fas fa-tag"></i>
+                </div>
+                <h3>Tarifs Officiels ENACTA</h3>
+                <p>Prix homologués selon la réglementation algérienne. Identiques dans tous les centres agréés.</p>
+            </div>
+            <div class="devis-info-card">
+                <div class="devis-info-icon icon-green">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Estimation Immédiate</h3>
+                <p>Obtenez votre devis en quelques secondes, sans vous déplacer au centre.</p>
+            </div>
+            <div class="devis-info-card">
+                <div class="devis-info-icon icon-amber">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>Centre OMAZA Agréé</h3>
+                <p>Centre unique à Akbou, facilement accessible depuis toute la région de Béjaia.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="notification" id="notification">
+    <i class="fas fa-check-circle" id="notifIcon"></i>
+    <span id="notifText">Action réussie</span>
+    <span class="close-notif" onclick="closeNotif()"><i class="fas fa-times"></i></span>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+    /* ── Années ── */
+    const anneeEl = document.getElementById('annee');
+    const thisYear = new Date().getFullYear();
+    for (let y = thisYear; y >= 1985; y--) {
+        const o = document.createElement('option');
+        o.value = y; o.textContent = y;
+        anneeEl.appendChild(o);
+    }
+
+    /* ── URL param ── */
+    const urlType = new URLSearchParams(window.location.search).get('type');
+    if (urlType) {
+        const el = document.querySelector(`[data-type="${urlType}"]`);
+        if (el) selectType(urlType, el);
+    }
+
+    /* ── Infos catégories ── */
+    const catInfos = {
+        vl:   { title: 'Véhicule Léger (VL) — Catégorie M1',   text: 'Voiture particulière, SUV, Break, Berline · PTAC ≤ 3 500 kg · CT tous les 2 ans' },
+        vul:  { title: 'Utilitaire Léger (VUL) — Catégorie N1', text: 'Fourgonnette, Camionnette, Pick-up professionnel · PTAC entre 1 500 et 3 500 kg · CT tous les 2 ans' },
+        pl:   { title: 'Poids Lourd (PL) — Catégories N2/N3',   text: 'Camion porteur, Tracteur routier, Semi-remorque · PTAC > 3 500 kg · CT annuel obligatoire' },
+        tc:   { title: 'Transport en Commun (TC) — Catégories M2/M3', text: 'Autobus, Autocar, Minibus (9+ places), Taxi collectif · CT tous les 6 mois' },
+        moto: { title: 'Deux-Roues — Catégorie L',              text: 'Moto, Scooter, Cyclomoteur, Quad homologué, Tricycle · CT tous les 2 ans' }
+    };
+
+    /* ── Tarifs ENACTA officiels (DA) ── */
+    const tarifs = {
+        vl:   { ct: 2100, contre: 1050, precheck: 1500, pollution: 800  },
+        vul:  { ct: 3200, contre: 1600, precheck: 2200, pollution: 1000 },
+        pl:   { ct: 4500, contre: 2250, precheck: 3200, pollution: 1200 },
+        tc:   { ct: 4500, contre: 2250, precheck: 3200, pollution: 1200 },
+        moto: { ct: 1500, contre:  750, precheck: 1000, pollution:  600 }
+    };
+
+    const serviceLabels = {
+        ct:        'Contrôle technique obligatoire',
+        contre:    'Contre-visite',
+        precheck:  'Pré-contrôle technique',
+        pollution: 'Test anti-pollution'
+    };
+
+    const periodLabels = {
+        vl:   '📅 Périodicité : tous les 2 ans',
+        vul:  '📅 Périodicité : tous les 2 ans',
+        pl:   '⚠️ Périodicité renforcée : annuel',
+        tc:   '⚠️ Périodicité renforcée : tous les 6 mois',
+        moto: '📅 Périodicité : tous les 2 ans'
+    };
+
+    let selectedType = null;
+
+    function selectType(type, el) {
+        document.querySelectorAll('.type-option').forEach(o => o.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedType = type;
+
+        /* Afficher info catégorie */
+        const info = catInfos[type];
+        document.getElementById('catInfoTitle').textContent = info.title;
+        document.getElementById('catInfoText').textContent  = info.text;
+        document.getElementById('catInfoBox').style.display = 'block';
+    }
+
+    function calculerDevis() {
+        if (!selectedType) {
+            showNotif('Veuillez sélectionner une catégorie de véhicule', 'error');
+            return;
+        }
+        const marque    = document.getElementById('marque').value;
+        const modele    = document.getElementById('modele').value.trim();
+        const annee     = document.getElementById('annee').value;
+        const carburant = document.getElementById('carburant').value;
+
+        if (!marque || !modele || !annee || !carburant) {
+            showNotif('Veuillez remplir tous les champs obligatoires', 'error');
+            return;
+        }
+
+        const services = [...document.querySelectorAll('input[name="service"]:checked')]
+            .map(i => i.value);
+
+        if (services.length === 0) {
+            showNotif('Veuillez sélectionner au moins un service', 'error');
+            return;
+        }
+
+        const t = tarifs[selectedType];
+        let total = 0;
+        let html  = '';
+
+        services.forEach(s => {
+            const prix = t[s];
+            html += `
+                <div class="devis-item">
+                    <span>
+                        <i class="fas fa-check-circle" style="color:#2ecc71;margin-right:8px;"></i>
+                        ${serviceLabels[s]}
+                    </span>
+                    <span>${prix.toLocaleString('fr-DZ')} DA</span>
+                </div>
+            `;
+            total += prix;
+        });
+
+        /* Frais de dossier */
+        html += `
+            <div class="devis-item devis-item-fees">
+                <span>Frais de dossier</span>
+                <span>200 DA</span>
+            </div>
+            <div class="devis-item devis-item-total">
+                <span>TOTAL TTC</span>
+                <span>${(total + 200).toLocaleString('fr-DZ')} DA</span>
+            </div>
+        `;
+        total += 200;
+
+        /* Remplissage */
+        document.getElementById('devisItems').innerHTML     = html;
+        document.getElementById('devisTotal').textContent   = total.toLocaleString('fr-DZ') + ' DA';
+        document.getElementById('devisRef').textContent     = 'Réf. OMAZA-' + Date.now().toString().slice(-6);
+        document.getElementById('devisVehicleInfo').textContent =
+            `${marque} ${modele} · ${annee} · ${carburant}`;
+        document.getElementById('devisPeriod').textContent  = periodLabels[selectedType];
+
+        /* Progress */
+        ['ps1','ps2'].forEach((id, i) => {
+            const el   = document.getElementById(id);
+            const line = document.getElementById('pl' + (i + 1));
+            el?.classList.remove('active');
+            el?.classList.add('done');
+            if (el) el.querySelector('.step-bubble').innerHTML = '<i class="fas fa-check"></i>';
+            line?.classList.add('done');
+        });
+        document.getElementById('ps3')?.classList.add('active');
+
+        document.getElementById('devisResult').classList.add('show');
+        document.getElementById('devisResult').scrollIntoView({ behavior:'smooth', block:'nearest' });
+        showNotif('Devis calculé avec succès !', 'success');
+    }
+
+    function imprimerDevis() { window.print(); }
+
+    function nouveauDevis() {
+        document.getElementById('devisResult').classList.remove('show');
+        document.getElementById('formDevis').reset();
+        document.querySelectorAll('.type-option').forEach(o => o.classList.remove('selected'));
+        document.getElementById('catInfoBox').style.display = 'none';
+        selectedType = null;
+
+        const ps1 = document.getElementById('ps1');
+        ps1?.classList.remove('done');
+        ps1?.classList.add('active');
+        if (ps1) ps1.querySelector('.step-bubble').textContent = '1';
+
+        const ps2 = document.getElementById('ps2');
+        ps2?.classList.remove('done');
+        if (ps2) ps2.querySelector('.step-bubble').textContent = '2';
+
+        ['pl1','pl2'].forEach(id => document.getElementById(id)?.classList.remove('done'));
+        document.getElementById('ps3')?.classList.remove('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+<script type="module">
+            import { initSession } from "../js/session.js";
+                initSession();
+</script>
+</body>
+</html>

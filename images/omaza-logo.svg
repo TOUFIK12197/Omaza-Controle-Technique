@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 130">
+  <!-- Bouclier -->
+  <g transform="translate(0,5)">
+    <path d="M50 0 L100 20 V60 C100 90 75 110 50 120 C25 110 0 90 0 60 V20 Z"
+          fill="#c0392b"/>
+    <!-- Symbole voiture (simple) -->
+    <path d="M22 65 H78 L70 50 H30 Z" fill="#ffffff"/>
+    <circle cx="34" cy="74" r="5" fill="#ffffff"/>
+    <circle cx="66" cy="74" r="5" fill="#ffffff"/>
+  </g>
+
+  <!-- Texte OMAZA -->
+  <text x="125" y="58" font-family="Arial, Helvetica, sans-serif"
+        font-weight="900" font-size="44" fill="#0f172a" letter-spacing="3">
+    OMAZA
+  </text>
+
+  <!-- Sous-texte -->
+  <text x="127" y="88" font-family="Arial, Helvetica, sans-serif"
+        font-weight="500" font-size="14" fill="#475569" letter-spacing="2">
+    Centre de Contrôle Technique
+  </text>
+</svg>

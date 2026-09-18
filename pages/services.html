@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Services - OMAZA Contrôle Technique | Akbou</title>
+    <meta name="description" content="Tarifs officiels ENACTA et types de véhicules pour le contrôle technique au Centre OMAZA, Akbou, Béjaia.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header" id="header">
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="brand-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="brand-text">
+                <span class="brand-name">OMAZA</span>
+                <span class="brand-sub">Contrôle Technique Auto</span>
+            </div>
+        </a>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="../index.html"    class="nav-link"><i class="fas fa-home"></i> Accueil</a></li>
+            <li><a href="services.html"    class="nav-link active"><i class="fas fa-tools"></i> Services</a></li>
+            <li><a href="devis.html"       class="nav-link"><i class="fas fa-file-invoice"></i> Devis</a></li>
+            <li><a href="rendez-vous.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Rendez-vous</a></li>
+            <li id="navUserItem"> <a href="inscription.html" class="nav-link btn-nav"><i class="fas fa-user"></i> Mon Espace</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </nav>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+    <div class="container">
+        <h1><i class="fas fa-tools"></i> Nos Services</h1>
+        <p>Tarifs officiels ENACTA · Tous types de véhicules · Akbou, Béjaia</p>
+    </div>
+</section>
+
+<!-- ═══ SECTION 1 — TYPES & TARIFS PAR CATÉGORIE ═══ -->
+<section class="section bg-gray-light">
+    <div class="container">
+
+        <!-- Bannière ENACTA -->
+        <div class="enacta-banner">
+            <i class="fas fa-certificate"></i>
+            <div>
+                <h3>Tarifs officiels homologués — ENACTA</h3>
+                <p>
+                    Le Centre OMAZA applique les tarifs officiels fixés par l'ENACTA et le Ministère
+                    des Transports Algérien. Tous les prix sont en Dinars Algériens (DA) TTC, sans frais cachés.
+                    Source : <strong>enacta.dz</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <span class="section-tag">Catégories Officielles</span>
+            <h2>Choisissez la catégorie de votre véhicule</h2>
+            <p>Classification officielle ENACTA selon le type et l'usage du véhicule</p>
+        </div>
+
+        <!-- TABS -->
+        <div class="vehicle-tabs">
+            <button class="vtab active" onclick="showPanel('vl', this)">
+                <i class="fas fa-car"></i> Véhicules Légers (VL)
+            </button>
+            <button class="vtab" onclick="showPanel('vul', this)">
+                <i class="fas fa-shuttle-van"></i> Utilitaires (VUL)
+            </button>
+            <button class="vtab" onclick="showPanel('pl', this)">
+                <i class="fas fa-truck"></i> Poids Lourds (PL)
+            </button>
+            <button class="vtab" onclick="showPanel('tc', this)">
+                <i class="fas fa-bus"></i> Transport Commun
+            </button>
+            <button class="vtab" onclick="showPanel('moto', this)">
+                <i class="fas fa-motorcycle"></i> Deux-Roues
+            </button>
+        </div>
+
+        <!-- ══ PANNEAU VL ══ -->
+        <div class="vehicle-panel active" id="panel-vl">
+            <div class="panel-grid">
+
+                <div class="panel-left">
+                    <div class="veh-hero">
+                        <i class="fas fa-car veh-hero-icon"></i>
+                        <h3>Véhicules Légers (VL)</h3>
+                        <div class="cat-badge">Catégorie M1 — Usage Particulier</div>
+                        <div class="veh-stats">
+                            <div class="veh-stat">
+                                <strong>2 100</strong>
+                                <span>DA — CT standard</span>
+                            </div>
+                            <div class="veh-stat-div"></div>
+                            <div class="veh-stat">
+                                <strong>2 ans</strong>
+                                <span>Périodicité</span>
+                            </div>
+                            <div class="veh-stat-div"></div>
+                            <div class="veh-stat">
+                                <strong>~45 min</strong>
+                                <span>Durée visite</span>
+                            </div>
+                        </div>
+                        <a href="devis.html?type=vl" class="btn btn-primary btn-full">
+                            <i class="fas fa-calculator"></i> Calculer mon devis
+                        </a>
+                    </div>
+
+                    <div class="subcat-list">
+                        <h4><i class="fas fa-list"></i> Véhicules concernés</h4>
+                        <div class="subcat-grid">
+                            <div class="subcat-item"><i class="fas fa-check"></i> Citadine</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Berline</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> SUV / 4x4</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Break</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Monospace</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Coupé</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Cabriolet</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Pick-up privé</div>
+                        </div>
+                        <div class="subcat-footer">
+                            <span class="period-badge">
+                                <i class="fas fa-weight-hanging"></i> PTAC ≤ 3 500 kg
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-right">
+                    <h4 class="panel-services-title">
+                        <i class="fas fa-clipboard-list"></i>
+                        Services disponibles — Véhicules Légers
+                    </h4>
+                    <div class="services-stack">
+
+                        <div class="svc-card svc-primary">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Contrôle technique obligatoire</span>
+                                    <span class="svc-sub">1ère visite puis renouvellement tous les 2 ans</span>
+                                </div>
+                                <span class="svc-price">2 100 DA</span>
+                            </div>
+                            <p class="svc-desc">
+                                Inspection complète selon le référentiel ENACTA : éclairage, freinage,
+                                direction, suspension, carrosserie, émissions et identification.
+                                Procès-verbal officiel remis en fin de visite.
+                            </p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~45 min</span>
+                                <span class="svc-tag"><i class="fas fa-redo"></i> Tous les 2 ans</span>
+                                <span class="svc-tag"><i class="fas fa-file-alt"></i> PV officiel</span>
+                                <span class="svc-tag"><i class="fas fa-certificate"></i> ENACTA agréé</span>
+                            </div>
+                        </div>
+
+                        <div class="svc-card svc-secondary">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Contre-visite</span>
+                                    <span class="svc-sub">Suite à un refus — Points défaillants seulement</span>
+                                </div>
+                                <span class="svc-price">1 050 DA</span>
+                            </div>
+                            <p class="svc-desc">
+                                Vérification ciblée des défauts constatés lors du contrôle initial,
+                                après réparation. Délai : 2 mois maximum après le refus.
+                            </p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~20 min</span>
+                                <span class="svc-tag"><i class="fas fa-percentage"></i> 50% du CT</span>
+                                <span class="svc-tag"><i class="fas fa-calendar-alt"></i> Délai 2 mois</span>
+                            </div>
+                        </div>
+
+                        <div class="svc-card svc-green">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Pré-contrôle technique</span>
+                                    <span class="svc-sub">Vérification préventive avant CT officiel</span>
+                                </div>
+                                <span class="svc-price">1 500 DA</span>
+                            </div>
+                            <p class="svc-desc">
+                                Anticipez les défauts avant votre contrôle officiel. Rapport
+                                non officiel remis pour guider vos réparations.
+                            </p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~35 min</span>
+                                <span class="svc-tag"><i class="fas fa-search"></i> Non officiel</span>
+                                <span class="svc-tag"><i class="fas fa-wrench"></i> Guide réparations</span>
+                            </div>
+                        </div>
+
+                        <div class="svc-card svc-purple">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Test anti-pollution seul</span>
+                                    <span class="svc-sub">Analyse gaz d'échappement uniquement</span>
+                                </div>
+                                <span class="svc-price">800 DA</span>
+                            </div>
+                            <p class="svc-desc">
+                                Mesure des émissions CO/HC (essence) ou opacité fumées (diesel).
+                                Résultats immédiats avec rapport.
+                            </p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~15 min</span>
+                                <span class="svc-tag"><i class="fas fa-leaf"></i> Essence & Diesel</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ PANNEAU VUL ══ -->
+        <div class="vehicle-panel" id="panel-vul">
+            <div class="panel-grid">
+                <div class="panel-left">
+                    <div class="veh-hero">
+                        <i class="fas fa-shuttle-van veh-hero-icon"></i>
+                        <h3>Véhicules Utilitaires Légers (VUL)</h3>
+                        <div class="cat-badge">Catégorie N1 — Usage Commercial / Professionnel</div>
+                        <div class="veh-stats">
+                            <div class="veh-stat"><strong>3 200</strong><span>DA — CT standard</span></div>
+                            <div class="veh-stat-div"></div>
+                            <div class="veh-stat"><strong>2 ans</strong><span>Périodicité</span></div>
+                            <div class="veh-stat-div"></div>
+                            <div class="veh-stat"><strong>~60 min</strong><span>Durée visite</span></div>
+                        </div>
+                        <a href="devis.html?type=vul" class="btn btn-primary btn-full">
+                            <i class="fas fa-calculator"></i> Calculer mon devis
+                        </a>
+                    </div>
+                    <div class="subcat-list">
+                        <h4><i class="fas fa-list"></i> Véhicules concernés</h4>
+                        <div class="subcat-grid">
+                            <div class="subcat-item"><i class="fas fa-check"></i> Fourgonnette</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Camionnette</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Fourgon léger</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Pick-up professionnel</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Benne légère</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Véhicule frigorifique</div>
+                        </div>
+                        <div class="subcat-footer">
+                            <span class="period-badge">
+                                <i class="fas fa-weight-hanging"></i> PTAC entre 1 500 et 3 500 kg
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-right">
+                    <h4 class="panel-services-title">
+                        <i class="fas fa-clipboard-list"></i>
+                        Services disponibles — Utilitaires Légers
+                    </h4>
+                    <div class="services-stack">
+                        <div class="svc-card svc-primary">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Contrôle technique VUL</span>
+                                    <span class="svc-sub">Vérification complète véhicule utilitaire léger</span>
+                                </div>
+                                <span class="svc-price">3 200 DA</span>
+                            </div>
+                            <p class="svc-desc">
+                                Contrôle adapté aux utilitaires : vérification de la charge utile,
+                                solidité de la carrosserie, équipements professionnels et freinage renforcé.
+                            </p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~60 min</span>
+                                <span class="svc-tag"><i class="fas fa-redo"></i> Tous les 2 ans</span>
+                                <span class="svc-tag"><i class="fas fa-file-alt"></i> PV officiel</span>
+                            </div>
+                        </div>
+                        <div class="svc-card svc-secondary">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Contre-visite VUL</span>
+                                    <span class="svc-sub">Suite à un refus de CT</span>
+                                </div>
+                                <span class="svc-price">1 600 DA</span>
+                            </div>
+                            <p class="svc-desc">Vérification des défauts corrigés. Délai de 2 mois maximum après le CT refusé.</p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~25 min</span>
+                                <span class="svc-tag"><i class="fas fa-percentage"></i> 50% du CT</span>
+                            </div>
+                        </div>
+                        <div class="svc-card svc-green">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Pré-contrôle VUL</span>
+                                    <span class="svc-sub">Inspection préventive flotte</span>
+                                </div>
+                                <span class="svc-price">2 200 DA</span>
+                            </div>
+                            <p class="svc-desc">Idéal pour les professionnels souhaitant maintenir leur flotte en conformité avant le CT officiel.</p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~45 min</span>
+                                <span class="svc-tag"><i class="fas fa-briefcase"></i> Usage professionnel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ PANNEAU PL ══ -->
+        <div class="vehicle-panel" id="panel-pl">
+            <div class="panel-grid">
+                <div class="panel-left">
+                    <div class="veh-hero">
+                        <i class="fas fa-truck veh-hero-icon"></i>
+                        <h3>Poids Lourds (PL)</h3>
+                        <div class="cat-badge">Catégories N2, N3 — Transport de marchandises</div>
+                        <div class="veh-stats">
+                            <div class="veh-stat"><strong>4 500</strong><span>DA — CT standard</span></div>
+                            <div class="veh-stat-div"></div>
+                            <div class="veh-stat"><strong>1 an</strong><span>Périodicité</span></div>
+                            <div class="veh-stat-div"></div>
+                            <div class="veh-stat"><strong>~90 min</strong><span>Durée visite</span></div>
+                        </div>
+                        <a href="devis.html?type=pl" class="btn btn-primary btn-full">
+                            <i class="fas fa-calculator"></i> Calculer mon devis
+                        </a>
+                    </div>
+                    <div class="subcat-list">
+                        <h4><i class="fas fa-list"></i> Véhicules concernés</h4>
+                        <div class="subcat-grid">
+                            <div class="subcat-item"><i class="fas fa-check"></i> Camion porteur</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Tracteur routier</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Semi-remorque</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Camion-benne</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Camion citerne</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Plateau porte-engins</div>
+                        </div>
+                        <div class="subcat-footer">
+                            <span class="period-badge period-danger">
+                                <i class="fas fa-exclamation-circle"></i> PTAC &gt; 3 500 kg · Annuel
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-right">
+                    <h4 class="panel-services-title">
+                        <i class="fas fa-clipboard-list"></i>
+                        Services disponibles — Poids Lourds
+                    </h4>
+                    <div class="services-stack">
+                        <div class="svc-card svc-primary">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Contrôle technique PL</span>
+                                    <span class="svc-sub">Obligatoire chaque année</span>
+                                </div>
+                                <span class="svc-price">4 500 DA</span>
+                            </div>
+                            <p class="svc-desc">
+                                Contrôle renforcé : essieux, freinage pneumatique, pneumatiques grande
+                                dimension, éclairage de gabarit et équipements obligatoires.
+                            </p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~90 min</span>
+                                <span class="svc-tag svc-tag-danger"><i class="fas fa-redo"></i> Annuel</span>
+                                <span class="svc-tag"><i class="fas fa-file-alt"></i> PV officiel</span>
+                            </div>
+                        </div>
+                        <div class="svc-card svc-secondary">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Contre-visite PL</span>
+                                    <span class="svc-sub">Suite à un refus</span>
+                                </div>
+                                <span class="svc-price">2 250 DA</span>
+                            </div>
+                            <p class="svc-desc">Vérification des points de refus après remise en conformité par un atelier agréé.</p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~40 min</span>
+                                <span class="svc-tag"><i class="fas fa-percentage"></i> 50% du CT</span>
+                            </div>
+                        </div>
+                        <div class="svc-card svc-green">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Pré-contrôle PL</span>
+                                    <span class="svc-sub">Inspection préventive flotte professionnelle</span>
+                                </div>
+                                <span class="svc-price">3 200 DA</span>
+                            </div>
+                            <p class="svc-desc">Recommandé pour les entreprises de transport souhaitant maintenir leur flotte conforme.</p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~70 min</span>
+                                <span class="svc-tag"><i class="fas fa-building"></i> Entreprises</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ PANNEAU TC ══ -->
+        <div class="vehicle-panel" id="panel-tc">
+            <div class="panel-grid">
+                <div class="panel-left">
+                    <div class="veh-hero">
+                        <i class="fas fa-bus veh-hero-icon"></i>
+                        <h3>Transport en Commun (TC)</h3>
+                        <div class="cat-badge">Catégories M2, M3 — Transport de personnes</div>
+                        <div class="veh-stats">
+                            <div class="veh-stat"><strong>4 500</strong><span>DA — CT standard</span></div>
+                            <div class="veh-stat-div"></div>
+                            <div class="veh-stat"><strong>6 mois</strong><span>Périodicité</span></div>
+                            <div class="veh-stat-div"></div>
+                            <div class="veh-stat"><strong>~90 min</strong><span>Durée visite</span></div>
+                        </div>
+                        <a href="devis.html?type=tc" class="btn btn-primary btn-full">
+                            <i class="fas fa-calculator"></i> Calculer mon devis
+                        </a>
+                    </div>
+                    <div class="subcat-list">
+                        <h4><i class="fas fa-list"></i> Véhicules concernés</h4>
+                        <div class="subcat-grid">
+                            <div class="subcat-item"><i class="fas fa-check"></i> Autobus urbain</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Autocar interurbain</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Minibus (9 places+)</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Taxi collectif</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Bus scolaire</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Ambulance</div>
+                        </div>
+                        <div class="subcat-footer">
+                            <span class="period-badge period-danger">
+                                <i class="fas fa-users"></i> Plus de 8 passagers · 6 mois
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-right">
+                    <h4 class="panel-services-title">
+                        <i class="fas fa-clipboard-list"></i>
+                        Services disponibles — Transport en Commun
+                    </h4>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Périodicité renforcée :</strong> Les véhicules de transport
+                            de voyageurs sont soumis à un contrôle technique <strong>tous les 6 mois</strong>.
+                        </div>
+                    </div>
+                    <div class="services-stack">
+                        <div class="svc-card svc-primary">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Contrôle technique TC</span>
+                                    <span class="svc-sub">Obligatoire tous les 6 mois</span>
+                                </div>
+                                <span class="svc-price">4 500 DA</span>
+                            </div>
+                            <p class="svc-desc">
+                                Contrôle renforcé sécurité passagers : sièges, ceintures, issues de
+                                secours, marteaux brise-glace, portes automatiques et freinage.
+                            </p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~90 min</span>
+                                <span class="svc-tag svc-tag-danger"><i class="fas fa-redo"></i> Tous les 6 mois</span>
+                                <span class="svc-tag"><i class="fas fa-file-alt"></i> PV officiel</span>
+                            </div>
+                        </div>
+                        <div class="svc-card svc-secondary">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Contre-visite TC</span>
+                                    <span class="svc-sub">Suite à un refus</span>
+                                </div>
+                                <span class="svc-price">2 250 DA</span>
+                            </div>
+                            <p class="svc-desc">Vérification des défauts après remise en état. Délai court vu la périodicité semestrielle.</p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~40 min</span>
+                                <span class="svc-tag"><i class="fas fa-percentage"></i> 50% du CT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ PANNEAU MOTO ══ -->
+        <div class="vehicle-panel" id="panel-moto">
+            <div class="panel-grid">
+                <div class="panel-left">
+                    <div class="veh-hero">
+                        <i class="fas fa-motorcycle veh-hero-icon"></i>
+                        <h3>Deux-Roues & Trois-Roues</h3>
+                        <div class="cat-badge">Catégorie L — Motocycles</div>
+                        <div class="veh-stats">
+                            <div class="veh-stat"><strong>1 500</strong><span>DA — CT standard</span></div>
+                            <div class="veh-stat-div"></div>
+                            <div class="veh-stat"><strong>2 ans</strong><span>Périodicité</span></div>
+                            <div class="veh-stat-div"></div>
+                            <div class="veh-stat"><strong>~30 min</strong><span>Durée visite</span></div>
+                        </div>
+                        <a href="devis.html?type=moto" class="btn btn-primary btn-full">
+                            <i class="fas fa-calculator"></i> Calculer mon devis
+                        </a>
+                    </div>
+                    <div class="subcat-list">
+                        <h4><i class="fas fa-list"></i> Véhicules concernés</h4>
+                        <div class="subcat-grid">
+                            <div class="subcat-item"><i class="fas fa-check"></i> Moto (≥ 50 cc)</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Scooter</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Cyclomoteur</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Tricycle moteur</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Quad homologué</div>
+                            <div class="subcat-item"><i class="fas fa-check"></i> Side-car</div>
+                        </div>
+                        <div class="subcat-footer">
+                            <span class="period-badge">
+                                <i class="fas fa-road"></i> Immatriculé pour usage routier
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-right">
+                    <h4 class="panel-services-title">
+                        <i class="fas fa-clipboard-list"></i>
+                        Services disponibles — Deux-Roues
+                    </h4>
+                    <div class="services-stack">
+                        <div class="svc-card svc-primary">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Contrôle technique moto</span>
+                                    <span class="svc-sub">Tous les 2 ans</span>
+                                </div>
+                                <span class="svc-price">1 500 DA</span>
+                            </div>
+                            <p class="svc-desc">
+                                Contrôle spécifique deux-roues : freinage avant/arrière, pneumatiques,
+                                éclairage, guidon, cadre, fourche, chaîne et émissions.
+                            </p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~30 min</span>
+                                <span class="svc-tag"><i class="fas fa-redo"></i> Tous les 2 ans</span>
+                                <span class="svc-tag"><i class="fas fa-file-alt"></i> PV officiel</span>
+                            </div>
+                        </div>
+                        <div class="svc-card svc-secondary">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Contre-visite moto</span>
+                                    <span class="svc-sub">Suite à un refus</span>
+                                </div>
+                                <span class="svc-price">750 DA</span>
+                            </div>
+                            <p class="svc-desc">Vérification des défauts corrigés. Délai de 2 mois après le refus du CT initial.</p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~15 min</span>
+                                <span class="svc-tag"><i class="fas fa-percentage"></i> 50% du CT</span>
+                            </div>
+                        </div>
+                        <div class="svc-card svc-green">
+                            <div class="svc-top">
+                                <div class="svc-info">
+                                    <span class="svc-name">Pré-contrôle moto</span>
+                                    <span class="svc-sub">Vérification préventive</span>
+                                </div>
+                                <span class="svc-price">1 000 DA</span>
+                            </div>
+                            <p class="svc-desc">Inspection préalable pour anticiper les points de refus avant le CT officiel.</p>
+                            <div class="svc-tags">
+                                <span class="svc-tag"><i class="fas fa-clock"></i> ~25 min</span>
+                                <span class="svc-tag"><i class="fas fa-search"></i> Non officiel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══ SECTION 2 — TABLEAU TARIFS ═══ -->
+<section class="section bg-white">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Tarifs Officiels ENACTA</span>
+            <h2>Récapitulatif complet des tarifs</h2>
+            <p>Grille tarifaire officielle — Prix en Dinars Algériens (DA)</p>
+        </div>
+
+        <div class="tarifs-wrapper">
+            <table class="tarifs-table">
+                <thead>
+                    <tr>
+                        <th class="th-service">Service</th>
+                        <th><i class="fas fa-car"></i> VL<br><small>Voiture particulière</small></th>
+                        <th><i class="fas fa-shuttle-van"></i> VUL<br><small>Utilitaire léger</small></th>
+                        <th><i class="fas fa-truck"></i> PL<br><small>Poids lourd</small></th>
+                        <th><i class="fas fa-bus"></i> TC<br><small>Transport commun</small></th>
+                        <th><i class="fas fa-motorcycle"></i> Moto<br><small>Deux-roues</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="td-service">
+                            <strong>Contrôle technique obligatoire</strong>
+                            <span>Vérification complète réglementaire</span>
+                        </td>
+                        <td><div class="price-da">2 100 DA<small>Tous les 2 ans</small></div></td>
+                        <td><div class="price-da">3 200 DA<small>Tous les 2 ans</small></div></td>
+                        <td><div class="price-da">4 500 DA<small>Annuel</small></div></td>
+                        <td><div class="price-da">4 500 DA<small>Tous les 6 mois</small></div></td>
+                        <td><div class="price-da">1 500 DA<small>Tous les 2 ans</small></div></td>
+                    </tr>
+                    <tr>
+                        <td class="td-service">
+                            <strong>Contre-visite</strong>
+                            <span>50% du tarif CT — après réparation</span>
+                        </td>
+                        <td><div class="price-da">1 050 DA</div></td>
+                        <td><div class="price-da">1 600 DA</div></td>
+                        <td><div class="price-da">2 250 DA</div></td>
+                        <td><div class="price-da">2 250 DA</div></td>
+                        <td><div class="price-da">750 DA</div></td>
+                    </tr>
+                    <tr>
+                        <td class="td-service">
+                            <strong>Pré-contrôle technique</strong>
+                            <span>Vérification préventive — non officiel</span>
+                        </td>
+                        <td><div class="price-da">1 500 DA</div></td>
+                        <td><div class="price-da">2 200 DA</div></td>
+                        <td><div class="price-da">3 200 DA</div></td>
+                        <td><div class="price-da">3 200 DA</div></td>
+                        <td><div class="price-da">1 000 DA</div></td>
+                    </tr>
+                    <tr>
+                        <td class="td-service">
+                            <strong>Test anti-pollution seul</strong>
+                            <span>Analyse gaz d'échappement uniquement</span>
+                        </td>
+                        <td><div class="price-da">800 DA</div></td>
+                        <td><div class="price-da">1 000 DA</div></td>
+                        <td><div class="price-da">1 200 DA</div></td>
+                        <td><div class="price-da">1 200 DA</div></td>
+                        <td><div class="price-da">600 DA</div></td>
+                    </tr>
+                    <tr>
+                        <td class="td-service">
+                            <strong>Périodicité réglementaire</strong>
+                            <span>Délai légal entre deux contrôles</span>
+                        </td>
+                        <td><span class="period-cell">2 ans</span></td>
+                        <td><span class="period-cell">2 ans</span></td>
+                        <td><span class="period-cell period-cell-warn">1 an</span></td>
+                        <td><span class="period-cell period-cell-danger">6 mois</span></td>
+                        <td><span class="period-cell">2 ans</span></td>
+                    </tr>
+                    <tr class="tr-total">
+                        <td class="td-service">
+                            <strong>Frais de dossier</strong>
+                            <span>Inclus dans tous les services</span>
+                        </td>
+                        <td colspan="5" class="td-center">
+                            200 DA — Tous véhicules
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="alert alert-info tarifs-note">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <strong>Source officielle des tarifs</strong><br>
+                Ces tarifs sont issus de la grille officielle de l'<strong>ENACTA</strong>,
+                sous tutelle du Ministère des Transports Algérien.
+                Consultez <a href="https://www.enacta.dz" target="_blank">www.enacta.dz</a>
+                pour les dernières mises à jour.
+            </div>
+        </div>
+
+        <div class="section-cta">
+            <a href="devis.html"       class="btn btn-primary"><i class="fas fa-calculator"></i> Calculer mon devis</a>
+            <a href="rendez-vous.html" class="btn btn-secondary"><i class="fas fa-calendar-alt"></i> Prendre rendez-vous</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ SECTION 3 — POINTS DE CONTRÔLE ═══ -->
+<section class="section bg-gray-light">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Inspection Complète</span>
+            <h2>Nos points de vérification</h2>
+            <p>Conformément au référentiel technique ENACTA — 119+ points inspectés</p>
+        </div>
+
+        <div class="ctrl-grid">
+            <div class="ctrl-card">
+                <div class="ctrl-head">
+                    <div class="ctrl-icon ci-teal"><i class="fas fa-id-card"></i></div>
+                    <div><h3>Identification Véhicule</h3><span>10 points</span></div>
+                </div>
+                <ul class="ctrl-list">
+                    <li><i class="fas fa-check"></i> Numéro VIN / châssis</li>
+                    <li><i class="fas fa-check"></i> Plaques d'immatriculation</li>
+                    <li><i class="fas fa-check"></i> Conformité carte de circulation</li>
+                    <li><i class="fas fa-check"></i> Kilométrage et cohérence</li>
+                    <li><i class="fas fa-check"></i> Marque, modèle et variante</li>
+                    <li><i class="fas fa-check"></i> Catégorie et PTAC</li>
+                </ul>
+            </div>
+            <div class="ctrl-card">
+                <div class="ctrl-head">
+                    <div class="ctrl-icon ci-red"><i class="fas fa-eye"></i></div>
+                    <div><h3>Éclairage & Signalisation</h3><span>18 points</span></div>
+                </div>
+                <ul class="ctrl-list">
+                    <li><i class="fas fa-check"></i> Phares croisement et route</li>
+                    <li><i class="fas fa-check"></i> Feux stop, arrière, de plaque</li>
+                    <li><i class="fas fa-check"></i> Clignotants avant et arrière</li>
+                    <li><i class="fas fa-check"></i> Antibrouillards avant et arrière</li>
+                    <li><i class="fas fa-check"></i> Réglage optique des projecteurs</li>
+                    <li><i class="fas fa-check"></i> Feux de position et de recul</li>
+                </ul>
+            </div>
+            <div class="ctrl-card">
+                <div class="ctrl-head">
+                    <div class="ctrl-icon ci-blue"><i class="fas fa-compact-disc"></i></div>
+                    <div><h3>Système de Freinage</h3><span>22 points</span></div>
+                </div>
+                <ul class="ctrl-list">
+                    <li><i class="fas fa-check"></i> Efficacité freins de service</li>
+                    <li><i class="fas fa-check"></i> Frein de stationnement</li>
+                    <li><i class="fas fa-check"></i> Disques, plaquettes et tambours</li>
+                    <li><i class="fas fa-check"></i> Flexibles et canalisations</li>
+                    <li><i class="fas fa-check"></i> Symétrie de freinage</li>
+                    <li><i class="fas fa-check"></i> Système ABS (si équipé)</li>
+                </ul>
+            </div>
+            <div class="ctrl-card">
+                <div class="ctrl-head">
+                    <div class="ctrl-icon ci-green"><i class="fas fa-leaf"></i></div>
+                    <div><h3>Émissions & Pollution</h3><span>8 points</span></div>
+                </div>
+                <ul class="ctrl-list">
+                    <li><i class="fas fa-check"></i> Teneur CO et HC (essence)</li>
+                    <li><i class="fas fa-check"></i> Opacité des fumées (diesel)</li>
+                    <li><i class="fas fa-check"></i> État du système d'échappement</li>
+                    <li><i class="fas fa-check"></i> Diagnostic OBD si disponible</li>
+                    <li><i class="fas fa-check"></i> Absence de fuites d'huile</li>
+                    <li><i class="fas fa-check"></i> Conformité normes en vigueur</li>
+                </ul>
+            </div>
+            <div class="ctrl-card">
+                <div class="ctrl-head">
+                    <div class="ctrl-icon ci-orange"><i class="fas fa-cog"></i></div>
+                    <div><h3>Direction & Suspension</h3><span>20 points</span></div>
+                </div>
+                <ul class="ctrl-list">
+                    <li><i class="fas fa-check"></i> Crémaillère et boîtier direction</li>
+                    <li><i class="fas fa-check"></i> Rotules et biellettes</li>
+                    <li><i class="fas fa-check"></i> Amortisseurs avant et arrière</li>
+                    <li><i class="fas fa-check"></i> Ressorts et silent-blocs</li>
+                    <li><i class="fas fa-check"></i> Triangles de suspension</li>
+                    <li><i class="fas fa-check"></i> Jeu volant et alignement</li>
+                </ul>
+            </div>
+            <div class="ctrl-card">
+                <div class="ctrl-head">
+                    <div class="ctrl-icon ci-purple"><i class="fas fa-car-crash"></i></div>
+                    <div><h3>Carrosserie & Structure</h3><span>15 points</span></div>
+                </div>
+                <ul class="ctrl-list">
+                    <li><i class="fas fa-check"></i> Intégrité châssis et longerons</li>
+                    <li><i class="fas fa-check"></i> État général de la carrosserie</li>
+                    <li><i class="fas fa-check"></i> Portes, capot et coffre</li>
+                    <li><i class="fas fa-check"></i> Vitres et rétroviseurs</li>
+                    <li><i class="fas fa-check"></i> Essuie-glaces et lave-glaces</li>
+                    <li><i class="fas fa-check"></i> Pare-chocs et boucliers</li>
+                </ul>
+            </div>
+            <div class="ctrl-card">
+                <div class="ctrl-head">
+                    <div class="ctrl-icon ci-amber"><i class="fas fa-circle-notch"></i></div>
+                    <div><h3>Pneumatiques & Roues</h3><span>12 points</span></div>
+                </div>
+                <ul class="ctrl-list">
+                    <li><i class="fas fa-check"></i> Profondeur sculptures (min. 1,6 mm)</li>
+                    <li><i class="fas fa-check"></i> État général des pneumatiques</li>
+                    <li><i class="fas fa-check"></i> Pression de gonflage</li>
+                    <li><i class="fas fa-check"></i> Conformité dimensions / carte grise</li>
+                    <li><i class="fas fa-check"></i> Jantes et fixation des roues</li>
+                    <li><i class="fas fa-check"></i> Équilibrage et voilage</li>
+                </ul>
+            </div>
+            <div class="ctrl-card">
+                <div class="ctrl-head">
+                    <div class="ctrl-icon ci-pink"><i class="fas fa-shield-alt"></i></div>
+                    <div><h3>Équipements Sécurité</h3><span>14 points</span></div>
+                </div>
+                <ul class="ctrl-list">
+                    <li><i class="fas fa-check"></i> Ceintures de sécurité</li>
+                    <li><i class="fas fa-check"></i> Klaxon / avertisseur sonore</li>
+                    <li><i class="fas fa-check"></i> Tableau de bord et témoins</li>
+                    <li><i class="fas fa-check"></i> Triangle de sécurité</li>
+                    <li><i class="fas fa-check"></i> Direction assistée</li>
+                    <li><i class="fas fa-check"></i> Appui-têtes et sièges</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="ctrl-total-banner">
+            <i class="fas fa-clipboard-check"></i>
+            <strong>119+ points de vérification</strong>
+            <p>Rapport complet remis à l'issue de chaque contrôle technique</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ SECTION 4 — DOCUMENTS ═══ -->
+<section class="section bg-white">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Préparation</span>
+            <h2>Documents à apporter obligatoirement</h2>
+            <p>Préparez ces pièces avant de vous rendre au Centre OMAZA</p>
+        </div>
+
+        <div class="docs-grid">
+            <div class="doc-card">
+                <div class="doc-icon"><i class="fas fa-id-card"></i></div>
+                <h4>Carte de Circulation</h4>
+                <p>La carte grise originale du véhicule. Les photocopies ne sont pas acceptées.</p>
+                <span class="badge-req">OBLIGATOIRE</span>
+            </div>
+            <div class="doc-card">
+                <div class="doc-icon"><i class="fas fa-passport"></i></div>
+                <h4>Pièce d'Identité</h4>
+                <p>Carte Nationale d'Identité ou passeport valide du propriétaire inscrit.</p>
+                <span class="badge-req">OBLIGATOIRE</span>
+            </div>
+            <div class="doc-card">
+                <div class="doc-icon"><i class="fas fa-file-contract"></i></div>
+                <h4>Procuration</h4>
+                <p>Si le propriétaire n'est pas présent : procuration écrite + copie CNI propriétaire.</p>
+                <span class="badge-opt">SI APPLICABLE</span>
+            </div>
+            <div class="doc-card">
+                <div class="doc-icon"><i class="fas fa-file-alt"></i></div>
+                <h4>Ancien Procès-Verbal</h4>
+                <p>Le PV du dernier contrôle technique si le véhicule a déjà été contrôlé.</p>
+                <span class="badge-opt">SI DISPONIBLE</span>
+            </div>
+            <div class="doc-card">
+                <div class="doc-icon"><i class="fas fa-shield-alt"></i></div>
+                <h4>Attestation d'Assurance</h4>
+                <p>Certificat d'assurance en cours de validité (recommandé).</p>
+                <span class="badge-opt">RECOMMANDÉ</span>
+            </div>
+            <div class="doc-card">
+                <div class="doc-icon"><i class="fas fa-tools"></i></div>
+                <h4>Véhicule en État</h4>
+                <p>Le véhicule doit être propre, en état de marche et non surchargé.</p>
+                <span class="badge-req">OBLIGATOIRE</span>
+            </div>
+        </div>
+
+        <div class="alert alert-warning docs-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div>
+                <strong>Sans la carte de circulation originale</strong>, le contrôle technique
+                ne pourra pas être effectué, même si vous avez un rendez-vous.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ SECTION 5 — DÉROULEMENT ═══ -->
+<section class="section bg-gray-light">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Déroulement</span>
+            <h2>Comment se passe votre visite ?</h2>
+            <p>5 étapes simples au Centre OMAZA d'Akbou</p>
+        </div>
+
+        <div class="steps-v">
+            <div class="step-row">
+                <div class="step-left">
+                    <div class="step-num">1</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                    <h4><i class="fas fa-door-open"></i> Accueil & Enregistrement</h4>
+                    <p>Un agent vérifie vos documents et enregistre votre véhicule dans le système. Une fiche de contrôle est créée.</p>
+                </div>
+            </div>
+            <div class="step-row">
+                <div class="step-left">
+                    <div class="step-num">2</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                    <h4><i class="fas fa-search"></i> Inspection Visuelle Extérieure</h4>
+                    <p>Contrôle de la carrosserie, des vitrages, de l'éclairage, des pneumatiques et des équipements réglementaires.</p>
+                </div>
+            </div>
+            <div class="step-row">
+                <div class="step-left">
+                    <div class="step-num">3</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                    <h4><i class="fas fa-tools"></i> Contrôle sur Pont Élévateur</h4>
+                    <p>Inspection du dessous : freinage, suspension, direction, échappement, articulations et recherche de fuites.</p>
+                </div>
+            </div>
+            <div class="step-row">
+                <div class="step-left">
+                    <div class="step-num">4</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                    <h4><i class="fas fa-smog"></i> Test Anti-Pollution</h4>
+                    <p>Analyse des émissions : CO/HC pour essence, opacité des fumées pour diesel. Résultats instantanés.</p>
+                </div>
+            </div>
+            <div class="step-row step-row-last">
+                <div class="step-left">
+                    <div class="step-num">5</div>
+                </div>
+                <div class="step-body">
+                    <h4><i class="fas fa-file-certificate"></i> Remise du Procès-Verbal Officiel</h4>
+                    <p>
+                        <strong>Succès :</strong> vignette apposée, CT valide.
+                        <strong>Refus :</strong> défauts listés et expliqués pour guider vos réparations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ SECTION 6 — FAQ ═══ -->
+<section class="section bg-white">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">FAQ</span>
+            <h2>Questions fréquentes</h2>
+            <p>Tout ce que vous devez savoir sur le contrôle technique en Algérie</p>
+        </div>
+
+        <div class="faq-wrapper">
+
+            <div class="faq-item open">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                    <strong>Quand mon véhicule doit-il passer le contrôle technique ?</strong>
+                    <div class="faq-ico"><i class="fas fa-plus"></i></div>
+                </div>
+                <div class="faq-ans">
+                    La périodicité dépend du type de véhicule :
+                    <ul class="faq-list">
+                        <li><strong>VL et VUL :</strong> Tous les 2 ans</li>
+                        <li><strong>Poids lourds (PL) :</strong> Tous les ans</li>
+                        <li><strong>Transport en commun (TC) :</strong> Tous les 6 mois</li>
+                        <li><strong>Deux-roues :</strong> Tous les 2 ans</li>
+                    </ul>
+                    Le premier contrôle est obligatoire dès la 3ème année de mise en circulation.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                    <strong>Que se passe-t-il si mon véhicule est refusé ?</strong>
+                    <div class="faq-ico"><i class="fas fa-plus"></i></div>
+                </div>
+                <div class="faq-ans">
+                    Vous recevez un PV listant les défauts. Vous avez <strong>2 mois</strong> pour effectuer
+                    les réparations puis revenir passer la <strong>contre-visite</strong> à 50% du tarif CT.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                    <strong>Quelle est la différence entre le CT et le pré-contrôle ?</strong>
+                    <div class="faq-ico"><i class="fas fa-plus"></i></div>
+                </div>
+                <div class="faq-ans">
+                    Le <strong>CT</strong> est obligatoire et produit un PV officiel reconnu par l'État.
+                    Le <strong>pré-contrôle</strong> est facultatif et préventif : il vous permet d'anticiper
+                    les défauts avant le CT officiel. Son résultat n'est pas officiel.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                    <strong>Le Centre OMAZA est-il agréé ENACTA ?</strong>
+                    <div class="faq-ico"><i class="fas fa-plus"></i></div>
+                </div>
+                <div class="faq-ans">
+                    Oui. Le Centre OMAZA est officiellement agréé ENACTA, sous tutelle du Ministère
+                    des Transports Algérien. Les PV délivrés sont valides sur tout le territoire national.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                    <strong>Les tarifs sont-ils les mêmes partout en Algérie ?</strong>
+                    <div class="faq-ico"><i class="fas fa-plus"></i></div>
+                </div>
+                <div class="faq-ans">
+                    Oui. Les tarifs sont <strong>fixés et homologués par l'ENACTA</strong> et s'appliquent
+                    uniformément dans tous les centres agréés. Il n'y a aucune variation régionale.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                    <strong>Puis-je venir sans rendez-vous ?</strong>
+                    <div class="faq-ico"><i class="fas fa-plus"></i></div>
+                </div>
+                <div class="faq-ans">
+                    Oui, selon disponibilité. Nous recommandons cependant de
+                    <strong>prendre rendez-vous en ligne</strong> pour garantir votre créneau
+                    et éviter l'attente.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-inner">
+            <div class="cta-content">
+                <h2>Prêt pour votre contrôle technique ?</h2>
+                <p>Réservez votre créneau au Centre OMAZA — Akbou. Agréé ENACTA.</p>
+                <div class="cta-btns">
+                    <a href="rendez-vous.html" class="btn btn-white">
+                        <i class="fas fa-calendar-check"></i> Prendre RDV en ligne
+                    </a>
+                    <a href="devis.html" class="btn btn-outline-white">
+                        <i class="fas fa-calculator"></i> Calculer mon devis
+                    </a>
+                    <a href="tel:+21334196325" class="btn btn-outline-white">
+                        <i class="fas fa-phone"></i> Appeler
+                    </a>
+                </div>
+            </div>
+            <div class="cta-image"><i class="fas fa-shield-alt"></i></div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>
+                        <span class="logo-name">OMAZA</span>
+                        <span class="logo-sub">Contrôle Technique Auto</span>
+                    </div>
+                </div>
+                <p>Centre agréé ENACTA à Akbou, Wilaya de Béjaia.</p>
+                <div class="footer-contact-quick">
+                    <a href="tel:+21334196325"><i class="fas fa-phone-alt"></i> +213 34 19 63 25</a>
+                    <a href="../index.html#localisation"><i class="fas fa-map-marker-alt"></i> Akbou, Béjaia</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="../index.html"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                    <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="devis.html"><i class="fas fa-chevron-right"></i> Devis</a></li>
+                    <li><a href="rendez-vous.html"><i class="fas fa-chevron-right"></i> Rendez-vous</a></li>
+                    <li><a href="inscription.html"><i class="fas fa-chevron-right"></i> Mon Espace</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Catégories</h4>
+                <ul>
+                    <li><a href="devis.html?type=vl"><i class="fas fa-chevron-right"></i> Véhicules Légers</a></li>
+                    <li><a href="devis.html?type=vul"><i class="fas fa-chevron-right"></i> Utilitaires (VUL)</a></li>
+                    <li><a href="devis.html?type=pl"><i class="fas fa-chevron-right"></i> Poids Lourds</a></li>
+                    <li><a href="devis.html?type=tc"><i class="fas fa-chevron-right"></i> Transport Commun</a></li>
+                    <li><a href="devis.html?type=moto"><i class="fas fa-chevron-right"></i> Deux-Roues</a></li>
+                </ul>
+            </div>
+            <div class="footer-horaires">
+                <h4>Horaires</h4>
+                <div class="footer-schedule">
+                    <div class="schedule-row">
+                        <span>Sam – Jeu</span>
+                        <span class="open-badge">08h – 17h</span>
+                    </div>
+                    <div class="schedule-row">
+                        <span>Vendredi</span>
+                        <span class="closed-badge">Fermé</span>
+                    </div>
+                </div>
+                <div class="footer-rdv">
+                    <a href="rendez-vous.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-alt"></i> Réserver
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Contrôle Technique Auto OMAZA — Akbou, Béjaia</p>
+            <div class="footer-legal">
+                <a href="#">Mentions légales</a>
+                <a href="#">Confidentialité</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<div class="notification" id="notification">
+    <i class="fas fa-check-circle" id="notifIcon"></i>
+    <span id="notifText">Action réussie</span>
+    <span class="close-notif" onclick="closeNotif()"><i class="fas fa-times"></i></span>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+    function showPanel(type, btn) {
+        document.querySelectorAll('.vehicle-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.vtab').forEach(b => b.classList.remove('active'));
+        document.getElementById('panel-' + type).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    function toggleFaq(el) {
+        const item = el.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const type = new URLSearchParams(window.location.search).get('type');
+        if (type) {
+            const btn = document.querySelector(`.vtab[onclick*="'${type}'"]`);
+            if (btn) showPanel(type, btn);
+        }
+    });
+</script>
+
+<script type="module">
+            import { initSession } from "../js/session.js";
+                initSession();
+</script>
+</body>
+</html>

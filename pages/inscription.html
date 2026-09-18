@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mon Espace - OMAZA Contrôle Technique</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet">
+    </head>
+    <body>
+        <header class="header" id="header">
+            <nav class="navbar">
+                <a href="../index.html" class="nav-brand">
+                    <div class="brand-icon"><i
+                            class="fas fa-shield-alt"></i></div>
+                    <div class="brand-text">
+                        <span class="brand-name">OMAZA</span>
+                        <span class="brand-sub">Contrôle Technique Auto</span>
+                    </div>
+                </a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="../index.html" class="nav-link">
+                            <i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="services.html" class="nav-link">
+                            <i class="fas fa-tools"></i> Services</a></li>
+                    <li><a href="devis.html" class="nav-link">
+                            <i class="fas fa-file-invoice"></i> Devis</a></li>
+                    <li><a href="rendez-vous.html" class="nav-link">
+                            <i class="fas fa-calendar-alt"></i>
+                            Rendez-vous</a></li>
+                    <li id="navUserItem">
+                        <a href="inscription.html" class="nav-link btn-nav">
+                            <i class="fas fa-user"></i> Mon Espace
+                        </a>
+                    </li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </nav>
+        </header>
+
+        <section class="page-header">
+            <div class="container">
+                <h1><i class="fas fa-user-circle"></i> Mon Espace Client</h1>
+                <p>Gérez vos rendez-vous et l'historique de vos contrôles</p>
+            </div>
+        </section>
+
+        <section class="form-section">
+            <div class="container">
+                <div class="form-card" style="max-width:580px">
+
+                    <div class="tabs">
+                        <button class="tab active"
+                            onclick="switchTab('inscription', event)">
+                            <i class="fas fa-user-plus"></i> Inscription
+                        </button>
+                        <button class="tab"
+                            onclick="switchTab('connexion', event)">
+                            <i class="fas fa-sign-in-alt"></i> Connexion
+                        </button>
+                    </div>
+
+                    <!-- INSCRIPTION -->
+                    <div id="tab-inscription">
+                        <h2 class="form-title">Créer mon compte</h2>
+                        <p class="form-subtitle">
+                            Gratuit · Suivi de vos RDV · Historique des
+                            contrôles
+                        </p>
+
+                        <form id="formInscription" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Prénom <span
+                                            class="required">*</span></label>
+                                    <div class="input-icon">
+                                        <i class="fas fa-user"></i>
+                                        <input type="text" id="iPrenom"
+                                            placeholder="Votre prénom" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nom <span
+                                            class="required">*</span></label>
+                                    <div class="input-icon">
+                                        <i class="fas fa-user"></i>
+                                        <input type="text" id="iNom"
+                                            placeholder="Votre nom" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Numéro de téléphone <span
+                                        class="required">*</span></label>
+                                <div class="input-icon">
+                                    <i class="fas fa-phone"></i>
+                                    <input type="tel" id="iTel"
+                                        placeholder="0X XX XX XX XX" required>
+                                </div>
+                            </div>
+
+                            <!-- ✅ Email rendu obligatoire (requis par Firebase Auth) -->
+                            <div class="form-group">
+                                <label>Adresse email <span
+                                        class="required">*</span></label>
+                                <div class="input-icon">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" id="iEmail"
+                                        placeholder="votre@email.com" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Mot de passe <span
+                                            class="required">*</span></label>
+                                    <div class="input-icon">
+                                        <i class="fas fa-lock"></i>
+                                        <input type="password" id="iPass"
+                                            placeholder="Min. 8 caractères"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirmer <span
+                                            class="required">*</span></label>
+                                    <div class="input-icon">
+                                        <i class="fas fa-lock"></i>
+                                        <input type="password" id="iPass2"
+                                            placeholder="Retapez..." required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-divider">
+                                Informations sur votre véhicule (optionnel)
+                            </div>
+
+                            <div class="alert alert-info">
+                                <i class="fas fa-car"
+                                    style="flex-shrink:0; margin-top:2px"></i>
+                                <span>Enregistrez votre véhicule maintenant pour
+                                    accélérer vos futures demandes de devis et
+                                    de rendez-vous.</span>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Type de véhicule</label>
+                                    <select id="iTypeVeh">
+                                        <option value>-- Type --</option>
+                                        <option>🚗 Voiture</option>
+                                        <option>🚛 Camion / VUL</option>
+                                        <option>🏍️ Moto / Scooter</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Marque</label>
+                                    <input type="text" id="iMarque"
+                                        placeholder="Renault, Toyota...">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Modèle</label>
+                                    <input type="text" id="iModele"
+                                        placeholder="Symbol, Clio...">
+                                </div>
+                                <div class="form-group">
+                                    <label>Immatriculation</label>
+                                    <input type="text" id="iImmat"
+                                        placeholder="12345-100-16"
+                                        style="text-transform:uppercase">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="iCGU" required>
+                                    <label for="iCGU">
+                                        J'accepte les
+                                        <a href="#">conditions d'utilisation</a>
+                                        du Centre OMAZA
+                                        <span class="required">*</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- ✅ Bouton avec état de chargement -->
+                            <button type="submit" id="btnInscription"
+                                class="btn btn-primary"
+                                style="width:100%; justify-content:center;
+                                       font-size:1rem; padding:16px;">
+                                <i class="fas fa-user-plus"></i> Créer mon
+                                compte
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- CONNEXION -->
+                    <div id="tab-connexion" style="display:none">
+                        <h2 class="form-title">Connexion</h2>
+                        <p class="form-subtitle">Accédez à votre espace
+                            personnel</p>
+
+                        <form id="formConnexion" novalidate>
+                            <div class="form-group">
+                                <label>Email <span
+                                        class="required">*</span></label>
+                                <div class="input-icon">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" id="cLogin"
+                                        placeholder="votre@email.com" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Mot de passe <span
+                                        class="required">*</span></label>
+                                <div class="input-icon">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" id="cPass"
+                                        placeholder="Votre mot de passe"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div style="display:flex; justify-content:flex-end;
+                                        margin-bottom:24px; margin-top:-10px;">
+                                <a href="#" id="forgotPasswordLink"
+                                    style="color:var(--primary); font-size:0.85rem;
+                                           font-weight:600;">
+                                    Mot de passe oublié ?
+                                </a>
+                            </div>
+
+                            <!-- ✅ Bouton connexion avec état de chargement -->
+                            <button type="submit" id="btnConnexion"
+                                class="btn btn-primary"
+                                style="width:100%; justify-content:center;
+                                       font-size:1rem; padding:16px;">
+                                <i class="fas fa-sign-in-alt"></i> Se connecter
+                            </button>
+
+                            <div class="form-divider">Pas encore de compte
+                                ?</div>
+
+                            <button type="button"
+                                onclick="switchTab('inscription', event)"
+                                class="btn btn-secondary"
+                                style="width:100%; justify-content:center;">
+                                <i class="fas fa-user-plus"></i> Créer un compte
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal succès inscription -->
+        <div class="modal-overlay" id="successModal">
+            <div class="modal">
+                <div class="modal-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2>Compte créé avec succès !</h2>
+                <p>Bienvenue chez OMAZA ! Votre espace client est maintenant
+                    actif.</p>
+
+                <div class="modal-detail">
+                    <div class="modal-detail-item">
+                        <i class="fas fa-user"></i>
+                        <span>Bienvenue <strong id="mNom"></strong></span>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i class="fas fa-phone"></i>
+                        <span id="mTel"></span>
+                    </div>
+                    <div class="modal-detail-item" id="mVehRow">
+                        <i class="fas fa-car"></i>
+                        <span id="mVehicule">Aucun véhicule enregistré</span>
+                    </div>
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <a href="rendez-vous.html" class="btn btn-primary"
+                        style="justify-content:center;">
+                        <i class="fas fa-calendar-check"></i> Prendre un
+                        rendez-vous
+                    </a>
+                    <a href="devis.html" class="btn btn-secondary"
+                        style="justify-content:center;">
+                        <i class="fas fa-file-invoice"></i> Obtenir un devis
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="notification" id="notification">
+            <i class="fas fa-check-circle" id="notifIcon"></i>
+            <span id="notifText">Action réussie</span>
+            <span class="close-notif" onclick="closeNotif()">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+
+        <script src="../js/main.js"></script>
+
+        <!-- ✅ Scripts non-module (UI uniquement) -->
+        <script>
+            // ─── Onglets ───────────────────────────────────────────────
+            function switchTab(tab, e) {
+                document.querySelectorAll('.tab').forEach(t =>
+                    t.classList.remove('active'));
+                const tabButton = e?.target?.closest('.tab');
+                if (tabButton) tabButton.classList.add('active');
+
+                document.getElementById('tab-inscription').style.display =
+                    tab === 'inscription' ? 'block' : 'none';
+                document.getElementById('tab-connexion').style.display =
+                    tab === 'connexion' ? 'block' : 'none';
+            }
+
+            // ─── Fermer modal au clic extérieur ────────────────────────
+            document.getElementById('successModal')
+                .addEventListener('click', function(e) {
+                    if (e.target === this) this.classList.remove('show');
+                });
+
+            // ─── Traduction des erreurs Firebase ───────────────────────
+            function traduireErreurFirebase(code) {
+                const erreurs = {
+                    'auth/email-already-in-use':
+                        'Cet email est déjà utilisé par un autre compte.',
+                    'auth/invalid-email':
+                        'L\'adresse email est invalide.',
+                    'auth/weak-password':
+                        'Le mot de passe est trop faible (min. 8 caractères).',
+                    'auth/user-not-found':
+                        'Aucun compte trouvé avec cet email.',
+                    'auth/wrong-password':
+                        'Mot de passe incorrect.',
+                    'auth/too-many-requests':
+                        'Trop de tentatives. Veuillez réessayer plus tard.',
+                    'auth/network-request-failed':
+                        'Erreur réseau. Vérifiez votre connexion internet.',
+                    'auth/invalid-credential':
+                        'Email ou mot de passe incorrect.'
+                };
+                return erreurs[code] ||
+                    'Une erreur est survenue. Veuillez réessayer.';
+            }
+
+            // ─── État du bouton (chargement) ────────────────────────────
+            function setBtnLoading(btnId, loading) {
+                const btn = document.getElementById(btnId);
+                if (loading) {
+                    btn.disabled = true;
+                    btn.dataset.original = btn.innerHTML;
+                    btn.innerHTML =
+                        '<i class="fas fa-spinner fa-spin"></i> Chargement...';
+                } else {
+                    btn.disabled = false;
+                    btn.innerHTML = btn.dataset.original;
+                }
+            }
+        </script>
+
+        <!-- ✅ Script module Firebase (un seul handler par formulaire) -->
+        <script type="module">
+            import { registerUser, loginUser } from "../js/auth.js?v=20260918-2";
+
+            // ══════════════════════════════════════════
+            //  INSCRIPTION
+            // ══════════════════════════════════════════
+            document.getElementById('formInscription')
+                .addEventListener('submit', async function(e) {
+                    e.preventDefault();
+
+                    const prenom    = document.getElementById('iPrenom').value.trim();
+                    const nom       = document.getElementById('iNom').value.trim();
+                    const telephone = document.getElementById('iTel').value.trim();
+                    const email     = document.getElementById('iEmail').value.trim();
+                    const pass      = document.getElementById('iPass').value;
+                    const pass2     = document.getElementById('iPass2').value;
+                    const cgu       = document.getElementById('iCGU').checked;
+                    const typeVeh   = document.getElementById('iTypeVeh').value;
+                    const marque    = document.getElementById('iMarque').value.trim();
+                    const modele    = document.getElementById('iModele').value.trim();
+                    const immat     = document.getElementById('iImmat').value.trim();
+
+                    // ── Validations ──────────────────────────────────────
+                    if (!prenom || !nom || !telephone || !email || !pass || !pass2) {
+                        showNotif('Veuillez remplir tous les champs obligatoires.', 'error');
+                        return;
+                    }
+
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        showNotif('Veuillez entrer une adresse email valide.', 'error');
+                        return;
+                    }
+
+                    if (pass.length < 8) {
+                        showNotif('Le mot de passe doit contenir au moins 8 caractères.', 'error');
+                        return;
+                    }
+
+                    if (pass !== pass2) {
+                        showNotif('Les mots de passe ne correspondent pas.', 'error');
+                        return;
+                    }
+
+                    if (!cgu) {
+                        showNotif("Veuillez accepter les conditions d'utilisation.", 'error');
+                        return;
+                    }
+
+                    // ── Appel Firebase ───────────────────────────────────
+                    setBtnLoading('btnInscription', true);
+
+                    const result = await registerUser({
+                        prenom,
+                        nom,
+                        telephone,
+                        email,
+                        password: pass,
+                        vehicule: { typeVeh, marque, modele, immat }
+                    });
+
+                    setBtnLoading('btnInscription', false);
+
+                    if (result.success) {
+                        // Remplir la modale
+                        document.getElementById('mNom').textContent =
+                            prenom + ' ' + nom.toUpperCase();
+                        document.getElementById('mTel').innerHTML =
+                            `Tél : <strong>${telephone}</strong>`;
+
+                        if (marque || modele) {
+                            document.getElementById('mVehicule').innerHTML =
+                                `<strong>${marque} ${modele}${immat ? ' — ' + immat.toUpperCase() : ''}</strong>`;
+                        }
+
+                        document.getElementById('successModal').classList.add('show');
+
+                    } else {
+                        showNotif(traduireErreurFirebase(result.code), 'error');
+                    }
+                });
+
+        </script>
+
+<script type="module">
+import { loginUser, resetUserPassword } from "../js/auth.js?v=20260918-2";
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const form = document.getElementById("formConnexion");
+    if (!form) return;
+
+    form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const email = document.getElementById("cLogin").value.trim();
+        const password = document.getElementById("cPass").value;
+
+        if (!email || !password) {
+            alert("Veuillez remplir tous les champs.");
+            return;
+        }
+
+        const result = await loginUser(email, password);
+
+        console.log("🧠 Résultat connexion :", result);
+
+        if (result.success) {
+
+            if (result.role === "admin") {
+                console.log("✅ Redirection vers ADMIN");
+                window.location.href = "admin.html";
+            } else {
+                console.log("👤 Redirection vers ACCUEIL");
+                window.location.href = "../index.html";
+            }
+
+        } else {
+            alert("❌ " + result.message);
+        }
+
+    });
+
+    const forgotPasswordLink = document.getElementById("forgotPasswordLink");
+    forgotPasswordLink?.addEventListener("click", async function(e) {
+        e.preventDefault();
+
+        const emailInput = document.getElementById("cLogin");
+        const email = emailInput.value.trim();
+
+        if (!email) {
+            showNotif("Saisissez votre adresse e-mail pour réinitialiser votre mot de passe.", "error");
+            emailInput.focus();
+            return;
+        }
+
+        forgotPasswordLink.style.pointerEvents = "none";
+        forgotPasswordLink.style.opacity = "0.6";
+
+        const result = await resetUserPassword(email);
+
+        forgotPasswordLink.style.pointerEvents = "";
+        forgotPasswordLink.style.opacity = "";
+
+        if (result.success) {
+            showNotif("Un e-mail de réinitialisation vient d’être envoyé. Vérifiez aussi vos courriers indésirables.");
+        } else {
+            showNotif(traduireErreurFirebase(result.code), "error");
+        }
+    });
+
+});
+</script>
+
+<script type="module">
+            import { initSession } from "../js/session.js";
+                initSession();
+</script>
+    </body>
+</html>

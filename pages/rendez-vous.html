@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rendez-vous - OMAZA Contrôle Technique | Akbou</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+<header class="header" id="header">
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <div class="brand-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="brand-text">
+                <span class="brand-name">OMAZA</span>
+                <span class="brand-sub">Contrôle Technique Auto</span>
+            </div>
+        </a>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="../index.html"    class="nav-link"><i class="fas fa-home"></i> Accueil</a></li>
+            <li><a href="services.html"    class="nav-link"><i class="fas fa-tools"></i> Services</a></li>
+            <li><a href="devis.html"       class="nav-link"><i class="fas fa-file-invoice"></i> Devis</a></li>
+            <li><a href="rendez-vous.html" class="nav-link active"><i class="fas fa-calendar-alt"></i> Rendez-vous</a></li>
+            <li id="navUserItem"> <a href="inscription.html" class="nav-link btn-nav"><i class="fas fa-user"></i> Mon Espace</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </nav>
+</header>
+
+<section class="page-header">
+    <div class="container">
+        <h1><i class="fas fa-calendar-check"></i> Prendre Rendez-vous</h1>
+        <p>Réservez votre créneau au Centre OMAZA — Akbou, Béjaia</p>
+    </div>
+</section>
+
+<section class="form-section">
+    <div class="container">
+        <div class="rdv-layout">
+
+            <!-- ══ COLONNE FORMULAIRE ══ -->
+            <div class="rdv-main">
+
+                <!-- ÉTAPE 1 : Coordonnées -->
+                <div class="form-card rdv-card">
+                    <h2 class="rdv-step-title">
+                        <span class="rdv-step-num">1</span>
+                        Vos coordonnées
+                    </h2>
+                    <p class="form-subtitle">Pour vous confirmer et vous contacter</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Prénom <span class="required">*</span></label>
+                            <div class="input-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="prenom" placeholder="Votre prénom" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Nom <span class="required">*</span></label>
+                            <div class="input-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="nom" placeholder="Votre nom" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Téléphone <span class="required">*</span></label>
+                            <div class="input-icon">
+                                <i class="fas fa-phone"></i>
+                                <input type="tel" id="telephone"
+                                    placeholder="0X XX XX XX XX" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email (facultatif)</label>
+                            <div class="input-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="email"
+                                    placeholder="votre@email.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wilaya">Wilaya de résidence</label>
+                        <select id="wilaya" aria-label="Wilaya de résidence">
+                            <option value="">-- Wilaya --</option>
+                            <option value="15" selected>06 - Béjaia</option>
+                            <option value="06">15 - Tizi Ouzou </option>
+                            <option value="09">09 - Blida</option>
+                            <option value="16">16 - Alger</option>
+                            <option value="26">26 - Médéa</option>
+                            <option value="34">34 - Bordj Bou Arréridj</option>
+                            <option value="35">35 - Boumerdès</option>
+                            <option value="autre">Autre wilaya</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="autreWilayaGroup" style="display:none;">
+                        <label for="autreWilaya">Précisez votre wilaya <span class="required">*</span></label>
+                        <div class="input-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" id="autreWilaya"
+                                placeholder="Ex. Sétif, Jijel, Bouira..."
+                                autocomplete="address-level1">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ÉTAPE 2 : Véhicule -->
+                <div class="form-card rdv-card">
+                    <h2 class="rdv-step-title">
+                        <span class="rdv-step-num">2</span>
+                        Votre véhicule
+                    </h2>
+                    <p class="form-subtitle">Informations sur le véhicule à contrôler</p>
+
+                    <div class="form-group">
+                        <label for="typeVehicule">Catégorie ENACTA <span class="required">*</span></label>
+                        <select id="typeVehicule" required onchange="updateRecap()" aria-label="Catégorie ENACTA">
+                            <option value="">-- Sélectionner la catégorie --</option>
+                            <option value="vl">🚗 Véhicule Léger (VL) — M1 · Voiture particulière</option>
+                            <option value="vul">🚐 Utilitaire Léger (VUL) — N1 · Fourgon, Camionnette</option>
+                            <option value="pl">🚛 Poids Lourd (PL) — N2/N3 · Camion, Tracteur</option>
+                            <option value="tc">🚌 Transport en Commun (TC) — M2/M3 · Bus, Minibus</option>
+                            <option value="moto">🏍️ Deux-Roues — Cat. L · Moto, Scooter</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Marque <span class="required">*</span></label>
+                            <input type="text" id="marqueVehicule"
+                                placeholder="Renault, Toyota, Mercedes..."
+                                required oninput="updateRecap()">
+                        </div>
+                        <div class="form-group">
+                            <label>Modèle</label>
+                            <input type="text" id="modeleVehicule"
+                                placeholder="Symbol, Hilux, Sprinter..."
+                                oninput="updateRecap()">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="immatriculation">Immatriculation <span class="required">*</span></label>
+                            <input type="text" id="immatriculation"
+                                placeholder="Ex: 12345-100-16"
+                                required style="text-transform:uppercase"
+                                oninput="updateRecap()">
+                        </div>
+                        <div class="form-group">
+                            <label for="anneeVehicule">Année</label>
+                            <select id="anneeVehicule" aria-label="Année du véhicule">
+                                <option value="">-- Année --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="serviceRDV">Service souhaité <span class="required">*</span></label>
+                        <select id="serviceRDV" required onchange="updateRecap()" aria-label="Service souhaité">
+                            <option value="">-- Type de visite --</option>
+                            <option value="ct">Contrôle technique obligatoire</option>
+                            <option value="contre">Contre-visite (suite à un refus)</option>
+                            <option value="precheck">Pré-contrôle technique</option>
+                            <option value="pollution">Test anti-pollution seul</option>
+                        </select>
+                    </div>
+
+                    <!-- Documents requis -->
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Documents obligatoires à apporter :</strong>
+                            <ul class="docs-alert-list">
+                                <li>Carte de circulation (carte grise) originale</li>
+                                <li>Pièce d'identité nationale (CNI ou passeport)</li>
+                                <li>Ancien procès-verbal si contre-visite</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Commentaires (facultatif)</label>
+                        <textarea id="commentaire"
+                            placeholder="Informations supplémentaires sur votre véhicule..."></textarea>
+                    </div>
+                </div>
+
+                <!-- ÉTAPE 3 : Calendrier -->
+                <div class="form-card rdv-card">
+                    <h2 class="rdv-step-title">
+                        <span class="rdv-step-num">3</span>
+                        Choisir une date et un créneau
+                    </h2>
+                    <p class="form-subtitle">Le centre est ouvert du samedi au jeudi de 08h à 17h</p>
+
+                    <div class="calendar-nav">
+                        <button class="cal-btn" onclick="changeMonth(-1)" type="button" aria-label="Mois précédent" title="Mois précédent">
+                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                        </button>
+                        <h3 id="calTitle"></h3>
+                        <button class="cal-btn" onclick="changeMonth(1)" type="button" aria-label="Mois suivant" title="Mois suivant">
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <div class="calendar-grid" id="calGrid"></div>
+
+                    <div class="time-slots-section" id="slotsSection" style="display:none;">
+                        <h4>
+                            <i class="fas fa-clock"></i>
+                            Créneaux disponibles — <span id="dateLabel"></span>
+                        </h4>
+                        <div class="slots-grid" id="slotsGrid"></div>
+                        <div class="slots-legend">
+                            <span class="legend-item">
+                                <span class="legend-dot legend-selected"></span> Sélectionné
+                            </span>
+                            <span class="legend-item">
+                                <span class="legend-dot legend-taken"></span> Complet
+                            </span>
+                            <span class="legend-item">
+                                <span class="legend-dot legend-free"></span> Disponible
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bouton confirmation -->
+                <button type="button" id="btnConfirmerRDV"
+                class="btn btn-primary btn-full btn-lg">
+                <i class="fas fa-calendar-check"></i>
+                       Confirmer mon rendez-vous
+                </button>
+
+            </div>
+
+            <!-- ══ SIDEBAR RÉCAPITULATIF ══ -->
+            <div class="rdv-sidebar">
+                <div class="recap-card">
+                    <h3 class="recap-title">
+                        <i class="fas fa-clipboard-list"></i> Récapitulatif
+                    </h3>
+
+                    <div class="recap-rows">
+                        <div class="recap-row">
+                            <i class="fas fa-calendar"></i>
+                            <div>
+                                <div class="recap-label">Date</div>
+                                <div class="recap-val" id="rDateVal">—</div>
+                            </div>
+                        </div>
+                        <div class="recap-row">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <div class="recap-label">Heure</div>
+                                <div class="recap-val" id="rHeure">—</div>
+                            </div>
+                        </div>
+                        <div class="recap-row">
+                            <i class="fas fa-tag"></i>
+                            <div>
+                                <div class="recap-label">Catégorie</div>
+                                <div class="recap-val" id="rCategorie">—</div>
+                            </div>
+                        </div>
+                        <div class="recap-row">
+                            <i class="fas fa-car"></i>
+                            <div>
+                                <div class="recap-label">Véhicule</div>
+                                <div class="recap-val" id="rVehicule">—</div>
+                            </div>
+                        </div>
+                        <div class="recap-row">
+                            <i class="fas fa-tools"></i>
+                            <div>
+                                <div class="recap-label">Service</div>
+                                <div class="recap-val" id="rService">—</div>
+                            </div>
+                        </div>
+                        <div class="recap-row recap-row-last">
+                            <i class="fas fa-hourglass-half"></i>
+                            <div>
+                                <div class="recap-label">Durée estimée</div>
+                                <div class="recap-val recap-val-highlight" id="rDuree">—</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Info centre -->
+                    <div class="recap-centre">
+                        <div class="recap-centre-title">
+                            <i class="fas fa-map-marker-alt"></i> Centre OMAZA
+                        </div>
+                        <div class="recap-centre-info">
+                            Akbou, Béjaia<br>
+                            Tél : +213 00 00 00 00<br>
+                            Sam–Jeu : 08h00 – 17h00<br>
+                            <strong>Vendredi : Fermé</strong>
+                        </div>
+                    </div>
+
+                    <div class="recap-note">
+                        <i class="fas fa-info-circle"></i>
+                        Annulation gratuite jusqu'à 24h avant votre rendez-vous
+                    </div>
+                </div>
+
+                <!-- Mini carte -->
+                <div class="recap-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3197.123!2d4.5583849!3d36.4762824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128cfcd4e0c89bc7%3A0x8be90b0f3ed479a2!2sContr%C3%B4le%20Technique%20Auto%20Omaza!5e0!3m2!1sfr!2sdz!4v1234567890"
+                        width="100%" height="180" style="border:0;display:block;"
+                        allowfullscreen="" loading="lazy">
+                    </iframe>
+                    <div class="recap-map-link">
+                        <a href="https://maps.google.com" target="_blank" rel="noopener">
+                            <i class="fab fa-google"></i> Ouvrir dans Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- MODAL CONFIRMATION -->
+<div class="modal-overlay" id="confirmModal">
+    <div class="modal">
+        <div class="modal-icon">
+            <i class="fas fa-calendar-check"></i>
+        </div>
+        <h2>Rendez-vous confirmé ! 🎉</h2>
+        <p>
+            Votre demande au Centre OMAZA a bien été enregistrée.
+            Nous vous confirmerons par téléphone dans les plus brefs délais.
+        </p>
+
+        <div class="modal-detail">
+            <div class="modal-detail-item">
+                <i class="fas fa-hashtag"></i>
+                <span>Référence : <strong id="refRDV"></strong></span>
+            </div>
+            <div class="modal-detail-item">
+                <i class="fas fa-user"></i>
+                <span id="confNom"></span>
+            </div>
+            <div class="modal-detail-item">
+                <i class="fas fa-phone"></i>
+                <span id="confTel"></span>
+            </div>
+            <div class="modal-detail-item">
+                <i class="fas fa-calendar"></i>
+                <span id="confDate"></span>
+            </div>
+            <div class="modal-detail-item">
+                <i class="fas fa-clock"></i>
+                <span id="confHeure"></span>
+            </div>
+            <div class="modal-detail-item">
+                <i class="fas fa-tag"></i>
+                <span id="confCategorie"></span>
+            </div>
+            <div class="modal-detail-item">
+                <i class="fas fa-car"></i>
+                <span id="confVehicule"></span>
+            </div>
+            <div class="modal-detail-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Centre OMAZA — Akbou, Béjaia</span>
+            </div>
+        </div>
+
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>
+                Pensez à apporter votre <strong>carte grise originale</strong>
+                et votre <strong>pièce d'identité</strong> le jour du rendez-vous.
+            </span>
+        </div>
+
+        <div class="modal-btns">
+            <a href="../index.html" class="btn btn-primary btn-full">
+                <i class="fas fa-home"></i> Retour à l'accueil
+            </a>
+            <button onclick="window.print()" class="btn btn-secondary btn-full">
+                <i class="fas fa-print"></i> Imprimer la confirmation
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="notification" id="notification">
+    <i class="fas fa-check-circle" id="notifIcon"></i>
+    <span id="notifText">Action réussie</span>
+    <span class="close-notif" onclick="closeNotif()"><i class="fas fa-times"></i></span>
+</div>
+
+<script src="../js/main.js"></script>
+
+<script type="module">
+/* =============================================
+   RENDEZ-VOUS OMAZA — Calendrier + Logique
+   (Version corrigée : imports uniquement en module)
+============================================= */
+
+import { getReservedSlotsByDate, createAppointment } from "../js/appointments.js?v=20260918-5";
+import { auth } from "../js/firebase-config.js";
+import { initSession } from "../js/session.js";
+import { initEmailJS } from "../js/emailjs-config.js";
+import { showToast } from "../js/toast.js";
+
+/* Init */
+initSession();
+initEmailJS();
+window.showToast = showToast;
+
+/* ── Wilaya personnalisée ── */
+const wilayaEl = document.getElementById('wilaya');
+const autreWilayaGroupEl = document.getElementById('autreWilayaGroup');
+const autreWilayaEl = document.getElementById('autreWilaya');
+
+wilayaEl.addEventListener('change', () => {
+    const isOtherWilaya = wilayaEl.value === 'autre';
+    autreWilayaGroupEl.style.display = isOtherWilaya ? 'block' : 'none';
+    autreWilayaEl.required = isOtherWilaya;
+    if (isOtherWilaya) autreWilayaEl.focus();
+    else autreWilayaEl.value = '';
+});
+
+/* ── Années véhicule ── */
+const anneeEl = document.getElementById('anneeVehicule');
+const thisYear = new Date().getFullYear();
+for (let y = thisYear; y >= 1985; y--) {
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y;
+    anneeEl.appendChild(o);
+}
+
+/* ── Labels catégories ── */
+const catLabels = {
+    vl:   '🚗 Véhicule Léger (VL)',
+    vul:  '🚐 Utilitaire Léger (VUL)',
+    pl:   '🚛 Poids Lourd (PL)',
+    tc:   '🚌 Transport en Commun (TC)',
+    moto: '🏍️ Deux-Roues'
+};
+
+const dureeLabels = {
+    vl:   '~45 minutes',
+    vul:  '~60 minutes',
+    pl:   '~90 minutes',
+    tc:   '~90 minutes',
+    moto: '~30 minutes'
+};
+
+const serviceLabels = {
+    ct:        'Contrôle technique',
+    contre:    'Contre-visite',
+    precheck:  'Pré-contrôle',
+    pollution: 'Test anti-pollution'
+};
+
+/* ── Mise à jour récapitulatif ── */
+window.updateRecap = function updateRecap() {
+    const type   = document.getElementById('typeVehicule').value;
+    const marque = document.getElementById('marqueVehicule').value;
+    const modele = document.getElementById('modeleVehicule').value;
+    const immat  = document.getElementById('immatriculation').value;
+    const svc    = document.getElementById('serviceRDV').value;
+
+    document.getElementById('rCategorie').textContent =
+        type ? catLabels[type] : '—';
+    document.getElementById('rDuree').textContent =
+        type ? dureeLabels[type] : '—';
+    document.getElementById('rService').textContent =
+        svc ? serviceLabels[svc] : '—';
+
+    const vparts = [marque, modele].filter(Boolean).join(' ');
+    document.getElementById('rVehicule').textContent =
+        [vparts, immat.toUpperCase()].filter(Boolean).join(' — ') || '—';
+};
+
+/* ============================
+   CALENDRIER OMAZA
+============================ */
+let currentDate = new Date();
+window.selectedDate = null;
+window.selectedSlot = null;
+
+const JOURS_SHORT = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+const JOURS_FULL  = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin',
+              'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+
+/* Liste complète des créneaux */
+const ALL_SLOTS = [
+    "08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30",
+    "13:30","14:00","14:30","15:00","15:30","16:00","16:30"
+];
+
+/* ============================
+   AFFICHAGE DU CALENDRIER
+============================ */
+function renderCalendar() {
+    const y = currentDate.getFullYear();
+    const m = currentDate.getMonth();
+    document.getElementById('calTitle').textContent = `${MOIS[m]} ${y}`;
+
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+
+    JOURS_SHORT.forEach(j => {
+        const h = document.createElement('div');
+        h.className = 'cal-day-header';
+        h.textContent = j;
+        grid.appendChild(h);
+    });
+
+    const firstDay = new Date(y, m, 1).getDay();
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    for (let i = 0; i < firstDay; i++) {
+        const e = document.createElement('div');
+        e.className = 'cal-day empty';
+        grid.appendChild(e);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const el = document.createElement('div');
+        el.className = 'cal-day';
+        el.textContent = d;
+
+        const thisDate = new Date(y, m, d);
+        const dow = thisDate.getDay();
+
+        // Désactiver passé + vendredis
+        if (thisDate < today || dow === 5) {
+            el.classList.add('disabled');
+            if (dow === 5) el.title = 'Fermé le vendredi';
+        } else {
+            if (thisDate.toDateString() === today.toDateString())
+                el.classList.add('today');
+
+            if (window.selectedDate &&
+                thisDate.toDateString() === window.selectedDate.toDateString())
+                el.classList.add('selected');
+
+            el.addEventListener('click', () => onDateClick(thisDate, el));
+        }
+
+        grid.appendChild(el);
+    }
+}
+
+/* ============================
+   CLIC SUR UNE DATE
+============================ */
+async function onDateClick(date, el) {
+    document.querySelectorAll('.cal-day.selected')
+        .forEach(d => d.classList.remove('selected'));
+    el.classList.add('selected');
+
+    window.selectedDate = date;
+    window.selectedSlot = null;
+    document.getElementById('rHeure').textContent = '—';
+
+    const label = `${JOURS_FULL[date.getDay()]} ${date.getDate()} ${MOIS[date.getMonth()]} ${date.getFullYear()}`;
+    document.getElementById('dateLabel').textContent = label;
+    document.getElementById('rDateVal').textContent = label;
+    document.getElementById('slotsSection').style.display = 'block';
+
+    // ✅ Récupération des vrais créneaux pris dans Firestore
+    const formattedDate = date.toISOString();
+    const takenSlots = await getReservedSlotsByDate(formattedDate);
+
+    renderSlots(takenSlots);
+}
+
+/* ============================
+   AFFICHAGE DES CRÉNEAUX
+============================ */
+function renderSlots(takenSlots = []) {
+    const grid = document.getElementById('slotsGrid');
+    grid.innerHTML = '';
+
+    ALL_SLOTS.forEach(slot => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = slot;
+
+        const isTaken = takenSlots.includes(slot);
+
+        btn.className = 'slot' + (isTaken ? ' taken' : '');
+        btn.disabled = isTaken;
+        if (isTaken) btn.title = "Créneau déjà réservé";
+
+        if (!isTaken) {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.slot.selected')
+                    .forEach(s => s.classList.remove('selected'));
+                btn.classList.add('selected');
+                window.selectedSlot = slot;
+                document.getElementById('rHeure').textContent = slot;
+            });
+        }
+
+        grid.appendChild(btn);
+    });
+}
+
+/* ============================
+   NAVIGATION MOIS
+============================ */
+window.changeMonth = function changeMonth(dir) {
+    currentDate.setMonth(currentDate.getMonth() + dir);
+    renderCalendar();
+};
+
+/* ============================
+   AFFICHER MODAL CONFIRMATION
+============================ */
+window.afficherModalConfirmation = function afficherModalConfirmation(appointmentId) {
+    const prenom = document.getElementById('prenom').value.trim();
+    const nom    = document.getElementById('nom').value.trim();
+    const tel    = document.getElementById('telephone').value.trim();
+    const type   = document.getElementById('typeVehicule').value;
+    const immat  = document.getElementById('immatriculation').value.trim();
+    const marque = document.getElementById('marqueVehicule').value.trim();
+    const modele = document.getElementById('modeleVehicule').value;
+
+    const ref = `OMAZA-${appointmentId}`;
+    const dateStr = `${JOURS_FULL[window.selectedDate.getDay()]} ${window.selectedDate.getDate()} ${MOIS[window.selectedDate.getMonth()]} ${window.selectedDate.getFullYear()}`;
+
+    document.getElementById('refRDV').textContent       = ref;
+    document.getElementById('confNom').innerHTML        = `<strong>${prenom} ${nom.toUpperCase()}</strong>`;
+    document.getElementById('confTel').innerHTML        = `Tél : <strong>${tel}</strong>`;
+    document.getElementById('confDate').innerHTML       = `<strong>${dateStr}</strong>`;
+    document.getElementById('confHeure').innerHTML      = `<strong>${window.selectedSlot}</strong>`;
+    document.getElementById('confCategorie').innerHTML  = `<strong>${catLabels[type]}</strong>`;
+    document.getElementById('confVehicule').innerHTML   =
+        `<strong>${marque}${modele ? ' ' + modele : ''} — ${immat.toUpperCase()}</strong>`;
+
+    document.getElementById('confirmModal').classList.add('show');
+};
+
+document.getElementById('confirmModal').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('show');
+});
+
+/* Init au chargement */
+document.addEventListener("DOMContentLoaded", () => {
+    renderCalendar();
+
+    const btn = document.getElementById('btnConfirmerRDV');
+    if (!btn) return;
+
+    let isSubmitting = false;
+
+    btn.addEventListener("click", async () => {
+
+        if (isSubmitting) return;
+
+        if (!auth.currentUser) {
+            showToast("Vous devez être connecté pour prendre un rendez-vous", "warning");
+            window.location.href = "inscription.html";
+            return;
+        }
+
+        const data = {
+            prenom: document.getElementById("prenom").value.trim(),
+            nom: document.getElementById("nom").value.trim(),
+            telephone: document.getElementById("telephone").value.trim(),
+            categorie: document.getElementById("typeVehicule").value,
+            marque: document.getElementById("marqueVehicule").value.trim(),
+            modele: document.getElementById("modeleVehicule").value.trim(),
+            immatriculation: document.getElementById("immatriculation").value.trim(),
+            anneeVehicule: document.getElementById("anneeVehicule").value,
+            service: document.getElementById("serviceRDV").value,
+            commentaire: document.getElementById("commentaire").value.trim(),
+            wilaya: wilayaEl.value === 'autre'
+                ? autreWilayaEl.value.trim()
+                : wilayaEl.options[wilayaEl.selectedIndex].text,
+            date: window.selectedDate ? window.selectedDate.toISOString() : null,
+            heure: window.selectedSlot || null
+        };
+
+        if (!data.prenom || !data.nom || !data.telephone) {
+            showToast("Remplissez vos coordonnées", "warning"); return;
+        }
+        if (wilayaEl.value === 'autre' && !data.wilaya) {
+            showToast("Précisez votre wilaya de résidence", "warning");
+            autreWilayaEl.focus();
+            return;
+        }
+        if (!data.categorie || !data.marque || !data.immatriculation) {
+            showToast("Renseignez votre véhicule", "warning"); return;
+        }
+        if (!data.service) {
+            showToast("Choisissez un service", "warning"); return;
+        }
+        if (!data.date || !data.heure) {
+            showToast("Choisissez une date et un créneau", "warning"); return;
+        }
+
+        isSubmitting = true;
+        btn.disabled = true;
+        const originalButtonHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enregistrement...';
+
+        const result = await createAppointment(data);
+
+        if (result && result.success) {
+            // ✅ EMAIL AU CLIENT
+            try {
+                await window.emailjs.send(
+                    "omaza_email",
+                    "omaza_confirmation_rdv",
+                    {
+                        to_email: auth.currentUser.email,
+                        prenom: data.prenom,
+                        date: new Date(data.date).toLocaleDateString("fr-FR"),
+                        heure: data.heure,
+                        marque: data.marque,
+                        modele: data.modele || "",
+                        immatriculation: data.immatriculation,
+                        service: data.service,
+
+                        titre: "📩 Votre rendez-vous OMAZA est bien enregistré",
+                        message_principal: "Votre rendez-vous a bien été enregistré au Centre OMAZA. Vous recevrez un email dès qu’il sera confirmé.",
+                        statut_label: "🟠 En attente",
+                        raison: ""
+                    }
+                );
+                console.log("✅ Email client envoyé !");
+            } catch (err) {
+                console.error("❌ Erreur email client :", err);
+            }
+
+            window.afficherModalConfirmation(result.id);
+        } else {
+            isSubmitting = false;
+            btn.disabled = false;
+            btn.innerHTML = originalButtonHtml;
+            showToast(result?.message || "Impossible d’enregistrer le rendez-vous.", "error");
+        }
+    });
+});
+</script>
+
+</body>
+</html>
