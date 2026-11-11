@@ -105,8 +105,10 @@ export function protectAdminPage() {
 
     onAuthStateChanged(auth, async (user) => {
 
+        const base = getBasePath();
+
         if (!user) {
-            window.location.href = basePath + "pages/inscription.html";
+            window.location.href = base + "pages/inscription.html";
             return;
         }
 
@@ -114,7 +116,7 @@ export function protectAdminPage() {
 
         if (!snap.exists() || snap.data().role !== "admin") {
             alert("Accès refusé ❌");
-            window.location.href = basePath + "index.html";
+            window.location.href = base + "index.html";
         }
 
     });
